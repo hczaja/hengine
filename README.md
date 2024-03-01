@@ -19,17 +19,18 @@
 
 **III. Planned Features**
 1) game-engine
- - stores game objects		    [         0%         ] 
- - handles game events		    [         0%         ]
- - handles animations			    [         0%         ]
- - handles collisions			    [         0%         ]
- - handles game window		    [         0%         ]
- - handles user input			    [         0%         ]
- - handles scripts				    [         0%         ]
- - 
+ - stores game objects		    [---------0%---------] 
+ - handles game events		    [---------0%---------]
+ - handles animations			[---------0%---------]
+ - handles collisions			[---------0%---------]
+ - handles game window		    [---------0%---------]
+ - handles user input			[---------0%---------]
+ - handles scripts				[---------0%---------]
+
 2) game-editor
  -
+
 3) game
- - simple story              [         0%         ]
- - enemies: up to 10 types   [         0%         ]
- - deck: up to 40 cards      [         0%         ]
+ - simple story                 [---------0%---------]
+ - enemies: up to 10 types      [---------0%---------] 
+ - deck: up to 40 cards         [---------0%---------]
