@@ -3,4 +3,5 @@
 public interface IClock
 {
     bool TryUpdate();
+    void Restart();
 }

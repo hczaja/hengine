@@ -9,5 +9,4 @@ public interface IWindow
     void DispatchEvents();
     void Clear();
     void Close();
-    void Restart();
 }

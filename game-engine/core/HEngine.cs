@@ -25,7 +25,7 @@ public sealed class HEngine
                 _window.Draw();
                 _window.Display();
 
-                _window.Restart();                
+                _clock.Restart();                
             }
         }
     }
