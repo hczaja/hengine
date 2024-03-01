@@ -1,6 +1,6 @@
 **I. Base projects, modules and dependencies**:
 
-1) game-enginepppp
+1) game-engine
  - uses SFML
 
 2) game-editor
@@ -13,9 +13,9 @@
 
 **II. Roadmap (estimations in days)**:
 
-1  - ~50 - core of the game-engine
-25 - ~75 - core of the game-editor
-~50 - 100 creating a game and polishing tools
+ - 1  - ~50 - core of the game-engine
+ - 25 - ~75 - core of the game-editor
+ - ~50 - 100 creating a game and polishing tools
 
 **III. Planned Features**
 1) game-engine
