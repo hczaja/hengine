@@ -12,23 +12,23 @@ public class HEngineClock : Clock, IClock
 
     public HEngineClock(float fps)
     {
-        this._timeBeforeUpdate = 1f / fps;
+        _timeBeforeUpdate = 1f / fps;
     }
 
     public bool TryUpdate()
     {
-        this._totalTimeElapsed = this.ElapsedTime.AsSeconds();
+        _totalTimeElapsed = ElapsedTime.AsSeconds();
 
-        float deltaTime = this._totalTimeElapsed - this._previousTotalTimeElapsed;
-        this._previousTotalTimeElapsed = this._totalTimeElapsed;
+        float deltaTime = _totalTimeElapsed - _previousTotalTimeElapsed;
+        _previousTotalTimeElapsed = _totalTimeElapsed;
 
-        this._totalTimeBeforeUpdate += deltaTime;
+        _totalTimeBeforeUpdate += deltaTime;
 
-        return this._totalTimeBeforeUpdate >= this._timeBeforeUpdate;
+        return _totalTimeBeforeUpdate >= _timeBeforeUpdate;
     }
 
     public new void Restart()
     {
-        this._totalTimeBeforeUpdate = 0f;
+        _totalTimeBeforeUpdate = 0f;
     }
 }
