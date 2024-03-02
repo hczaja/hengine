@@ -1,5 +1,4 @@
-﻿using game_engine.settings;
-using game_engine.time;
+﻿using game_engine.time;
 using game_engine.window;
 
 namespace game_engine.core;
