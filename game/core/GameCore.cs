@@ -8,12 +8,12 @@ internal class GameCore : IHEngineCore
 {
     public void Render(RenderTarget target)
     {
-        throw new NotImplementedException();
+
     }
 
     public void Update()
     {
-        throw new NotImplementedException();
+
     }
 
     public void _window_KeyPressed(object? sender, KeyEventArgs e)
