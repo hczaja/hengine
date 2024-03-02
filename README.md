@@ -22,9 +22,9 @@
  - stores game objects		    [---------0%---------] 
  - handles game events		    [---------0%---------]
  - handles animations			[---------0%---------]
- - handles collisions			[---------0%---------]
- - handles game window		    [---------0%---------]
- - handles user input			[---------0%---------]
+ - handles collisions			[==------10%---------]
+ - handles game window		    [====----20%---------]
+ - handles user input			[====----20%---------]
  - handles scripts				[---------0%---------]
 
 2) game-editor
