@@ -1,4 +1,4 @@
-﻿using game.core;
+﻿using game_editor.core;
 using game_engine.core;
 using game_engine.settings;
 using game_engine.time;
@@ -8,7 +8,7 @@ var settings = new HEngineSettings();
 var engine = new HEngine(
     new HEngineClock(settings.FPS),
     new HEngineWindow(
-        new GameCore(),
+        new EditorCore(),
         settings));
 
 engine.Run();
