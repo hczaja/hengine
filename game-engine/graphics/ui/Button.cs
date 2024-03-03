@@ -1,6 +1,6 @@
 ﻿using SFML.Graphics;
 
-namespace game_engine.graphics.interfaces;
+namespace game_engine.graphics.ui;
 
 public class Button : IDrawable
 {

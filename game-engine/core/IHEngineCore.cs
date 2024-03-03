@@ -1,10 +1,13 @@
-﻿using SFML.Graphics;
+﻿using game_engine.content;
+using SFML.Graphics;
 using SFML.Window;
 
 namespace game_engine.core;
 
 public interface IHEngineCore
 {
+    IContent ActualContent { get; }
+
     void _window_KeyPressed(object? sender, KeyEventArgs e);
     void _window_KeyReleased(object? sender, KeyEventArgs e);
     void _window_MouseButtonReleased(object? sender, MouseButtonEventArgs e);

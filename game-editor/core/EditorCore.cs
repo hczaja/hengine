@@ -1,4 +1,5 @@
-﻿using game_engine.core;
+﻿using game_engine.content;
+using game_engine.core;
 using SFML.Graphics;
 using SFML.Window;
 
@@ -6,6 +7,8 @@ namespace game_editor.core;
 
 internal class EditorCore : IHEngineCore
 {
+    public IContent ActualContent => throw new NotImplementedException();
+
     public void Render(RenderTarget target)
     {
 

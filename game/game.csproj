@@ -1,7 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
     <ProjectReference Include="..\game-engine\game-engine.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="graphics\ui\panels\" />
   </ItemGroup>
 
   <PropertyGroup>

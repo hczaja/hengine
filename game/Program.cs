@@ -8,7 +8,7 @@ var settings = new HEngineSettings();
 var engine = new HEngine(
     new HEngineClock(settings.FPS),
     new HEngineWindow(
-        new GameCore(),
+        new GameCore(settings),
         settings));
 
 engine.Run();
