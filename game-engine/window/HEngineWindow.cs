@@ -10,14 +10,17 @@ public class HEngineWindow : IWindow
     private readonly RenderWindow _window;
     private readonly IHEngineCore _core;
 
-    public HEngineWindow(IHEngineCore core, ISettings settings)
+    public HEngineWindow(IHEngineCore core)
     {
         _core = core;
 
-        _window = new RenderWindow(settings.Mode, settings.Title, settings.Styles);
+        _window = new RenderWindow(
+            HEngineSettings.Instance.Mode,
+            HEngineSettings.Instance.Title,
+            HEngineSettings.Instance.Styles);
 
-        _window.SetKeyRepeatEnabled(enable: settings.EnableKeyRepeat);
-        _window.SetMouseCursorVisible(visible: settings.MouseCursorVisible);
+        _window.SetKeyRepeatEnabled(enable: HEngineSettings.Instance.EnableKeyRepeat);
+        _window.SetMouseCursorVisible(visible: HEngineSettings.Instance.MouseCursorVisible);
 
         _window.Closed += (_, _) => Close();
         _window.KeyPressed += _core._window_KeyPressed;

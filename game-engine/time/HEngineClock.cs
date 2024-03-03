@@ -1,4 +1,5 @@
-﻿using SFML.System;
+﻿using game_engine.settings;
+using SFML.System;
 
 namespace game_engine.time;
 
@@ -10,9 +11,9 @@ public class HEngineClock : Clock, IClock
 
     private readonly float _timeBeforeUpdate;
 
-    public HEngineClock(float fps)
+    public HEngineClock()
     {
-        _timeBeforeUpdate = 1f / fps;
+        _timeBeforeUpdate = 1f / HEngineSettings.Instance.FPS;
     }
 
     public bool TryUpdate()

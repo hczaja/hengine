@@ -4,10 +4,6 @@
     <ProjectReference Include="..\game-engine\game-engine.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="graphics\ui\panels\" />
-  </ItemGroup>
-
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net7.0</TargetFramework>

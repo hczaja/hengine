@@ -15,7 +15,7 @@ internal class GameCore : IHEngineCore
 
     public Dictionary<string, IContent> ContentRegistry { get; }
 
-    public GameCore(ISettings settings)
+    public GameCore()
     {
         var main = new MainContent();
         var common = new StaticContent();
