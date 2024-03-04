@@ -1,5 +1,8 @@
-﻿using game_engine.events;
+﻿using game.context;
+using game_engine.context;
+using game_engine.events;
 using game_engine.events.input;
+using game_engine.events.system;
 using game_engine.graphics.ui;
 using game_engine.settings;
 using SFML.Graphics;
@@ -17,20 +20,30 @@ class CharacterActionsPanel : Panel
 
     private readonly Vector2f _actionButtonSize = new Vector2f(0.2f * _panelWidth, 0.2f * _panelHeight);
 
-    private Button[] Actions { get; }
+    private IContext Context { get; set; }
+    private Button[] Actions { get; set; }
 
-    public CharacterActionsPanel()
+    public CharacterActionsPanel(IContext context)
         : base(GetInitialPosition(), GetInitialSize())
     {
-        Actions = new Button[1];
+        Handle(new ChangeContextEvent(context));
+    }
 
-        var rest_action = new Button(
-            _actionButtonSize,
-            new Vector2f(this.Position.X, this.Position.Y),
-            new Texture("assets/textures/buttons/campfire.png"),
-            () => { Console.WriteLine("xd"); });
+    public override void Draw(RenderTarget render)
+    {
+        render.Draw(this);
+        foreach (var action in Actions) 
+        {
+            render.Draw(action);
+        }
+    }
 
-        Actions[0] = rest_action;
+    public override void Handle(MouseEvent @event)
+    {
+        foreach (var action in Actions) 
+        {
+            action.Handle(@event);
+        }
     }
 
     internal static Vector2f GetInitialPosition()
@@ -47,14 +60,51 @@ class CharacterActionsPanel : Panel
     internal static Vector2f GetInitialSize()
         => new Vector2f(_panelWidth, _panelHeight);
 
-    public override void Draw(RenderTarget render)
+    public override void Handle(ChangeContextEvent @event)
     {
-        render.Draw(this);
-        render.Draw(Actions[0]);
+        Context = @event.Context;
+
+        if (Context is LocationContext locationContext)
+            Actions = GetLocationContextActions(locationContext);
     }
 
-    public override void Handle(MouseEvent @event)
-    {
-        Actions[0].Handle(@event);
-    }
+    private Button[] GetLocationContextActions(LocationContext context) =>
+        [
+            GetRestButton(),
+            GetInventoryButton(),
+            GetDiaryButton(),
+            GetStatsButton(),
+            GetOptionsButton()
+        ];
+
+
+    private Button GetRestButton() => new Button(
+        _actionButtonSize,
+        new Vector2f(this.Position.X, this.Position.Y),
+        new Texture("assets/textures/buttons/campfire.png"),
+        callback: () => { Console.WriteLine("xd1"); });
+
+    private Button GetInventoryButton() => new Button(
+        _actionButtonSize,
+        new Vector2f(this.Position.X, this.Position.Y) + new Vector2f(_actionButtonSize.X, 0f),
+        new Texture("assets/textures/buttons/campfire.png"),
+        callback: () => { Console.WriteLine("xd2"); });
+
+    private Button GetDiaryButton() => new Button(
+        _actionButtonSize,
+        new Vector2f(this.Position.X, this.Position.Y) + new Vector2f(2 * _actionButtonSize.X, 0f),
+        new Texture("assets/textures/buttons/campfire.png"),
+        callback: () => { Console.WriteLine("xd3"); });
+
+    private Button GetStatsButton() => new Button(
+        _actionButtonSize,
+        new Vector2f(this.Position.X, this.Position.Y) + new Vector2f(3 * _actionButtonSize.X, 0f),
+        new Texture("assets/textures/buttons/campfire.png"),
+        callback: () => { Console.WriteLine("xd4"); });
+
+    private Button GetOptionsButton() => new Button(
+        _actionButtonSize,
+        new Vector2f(this.Position.X, this.Position.Y) + new Vector2f(4 * _actionButtonSize.X, 0f),
+        new Texture("assets/textures/buttons/campfire.png"),
+        callback: () => { Console.WriteLine("xd5"); });
 }

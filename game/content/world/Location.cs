@@ -2,10 +2,11 @@
 using game_engine.events;
 using game_engine.graphics;
 using SFML.Graphics;
+using game_engine.context;
 
 namespace game.content.world;
 
-internal class World :
+internal class Location :
     IDrawable,
     IEventHandler<MouseEvent>,
     IEventHandler<KeyboardEvent>
@@ -28,5 +29,10 @@ internal class World :
     public void Update()
     {
 
+    }
+
+    public IContext GetContext()
+    {
+        throw new NotImplementedException();
     }
 }

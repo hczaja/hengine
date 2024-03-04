@@ -10,15 +10,15 @@ public class Button :
     RectangleShape,
     IEventHandler<MouseEvent>
 {
-    private Action OnClick { get; }
+    private Action Callback { get; }
     private FloatRect Boundaries { get; }
 
-    public Button(Vector2f size, Vector2f position, Texture texture, Action onClick)
+    public Button(Vector2f size, Vector2f position, Texture texture, Action callback)
     {
         Size = size;
         Position = position;
         Texture = texture;
-        OnClick = onClick;
+        Callback = callback;
         Boundaries = GetGlobalBounds();
     }
 
@@ -26,7 +26,7 @@ public class Button :
     {
         if (Boundaries.IsMouseEventRaisedIn(@event) && @event.Type == MouseEventType.Pressed)
         {
-            OnClick();
+            Callback();
         }
     }
 }

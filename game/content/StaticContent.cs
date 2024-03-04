@@ -1,5 +1,6 @@
 ﻿using game_engine.content;
 using game_engine.events.input;
+using game_engine.events.system;
 using SFML.Graphics;
 
 namespace game.content;
@@ -17,6 +18,11 @@ class StaticContent : IContent
     }
 
     public void Handle(KeyboardEvent @event)
+    {
+
+    }
+
+    public void Handle(ChangeContextEvent @event)
     {
 
     }
