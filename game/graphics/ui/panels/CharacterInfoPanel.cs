@@ -1,5 +1,6 @@
 ﻿using game_engine.graphics.ui;
 using game_engine.settings;
+using SFML.Graphics;
 using SFML.System;
 
 namespace game.graphics.ui.panels;
@@ -25,4 +26,9 @@ class CharacterInfoPanel : Panel
 
     internal static Vector2f GetInitialSize()
         => new Vector2f(_panelWidth, _panelHeight);
+
+    public override void Draw(RenderTarget render)
+    {
+        render.Draw(this);
+    }
 }

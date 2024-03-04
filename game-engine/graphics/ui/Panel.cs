@@ -1,9 +1,11 @@
-﻿using SFML.Graphics;
+﻿using game_engine.events.input;
+using game_engine.events;
+using SFML.Graphics;
 using SFML.System;
 
 namespace game_engine.graphics.ui;
 
-public abstract class Panel : RectangleShape, IDrawable
+public abstract class Panel : RectangleShape, IDrawable, IEventHandler<MouseEvent>
 {
     public Panel(Vector2f position, Vector2f size) : base(size)
     {
@@ -11,5 +13,6 @@ public abstract class Panel : RectangleShape, IDrawable
         FillColor = Color.White;
     }
 
-    public virtual void Draw(RenderTarget render) => render.Draw(this);
+    public virtual void Draw(RenderTarget render) => throw new NotImplementedException();
+    public virtual void Handle(MouseEvent @event) => throw new NotImplementedException();
 }

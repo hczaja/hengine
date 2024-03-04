@@ -23,13 +23,13 @@ internal class WorldUserInterface :
 
     public void Draw(RenderTarget render)
     {
-        render.Draw(CharacterInfoPanel);
-        render.Draw(CharacterActionsPanel);
+        CharacterInfoPanel.Draw(render);
+        CharacterActionsPanel.Draw(render);
     }
 
     public void Handle(MouseEvent @event)
     {
-
+        CharacterActionsPanel.Handle(@event);
     }
 
     public void Handle(KeyboardEvent @event)
