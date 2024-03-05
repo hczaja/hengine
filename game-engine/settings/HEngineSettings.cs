@@ -11,7 +11,7 @@ public class HEngineSettings
 
     public float FPS => 30f;
 
-    public VideoMode Mode => VideoStandard.WXGA.Mode;
+    public VideoMode Mode => VideoStandard.FHD.Mode;
 
     public float WindowWidth => Mode.Width;
     public float WindowHeight => Mode.Height;

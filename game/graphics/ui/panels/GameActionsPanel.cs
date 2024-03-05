@@ -1,5 +1,4 @@
 ﻿using game.context;
-using game_engine.context;
 using game_engine.events.input;
 using game_engine.events.system;
 using game_engine.graphics.ui;
@@ -9,7 +8,7 @@ using SFML.System;
 
 namespace game.graphics.ui.panels;
 
-class CharacterActionsPanel : Panel
+class GameActionsPanel : Panel
 {
     private static readonly float _panelWidthRatio = 0.20f;
     private static readonly float _panelWidth = HEngineSettings.Instance.Mode.Width * _panelWidthRatio;
@@ -19,19 +18,18 @@ class CharacterActionsPanel : Panel
 
     private readonly Vector2f _actionButtonSize = new Vector2f(0.2f * _panelWidth, 0.5f * _panelHeight);
 
-    private IContext Context { get; set; }
     private Button[] Actions { get; set; }
 
-    public CharacterActionsPanel(IContext context)
+    public GameActionsPanel()
         : base(GetInitialPosition(), GetInitialSize())
     {
-        Handle(new ChangeContextEvent(context));
+        Actions = GetGameActions();
     }
 
     public override void Draw(RenderTarget render)
     {
         render.Draw(this);
-        foreach (var action in Actions) 
+        foreach (var action in Actions)
         {
             render.Draw(action);
         }
@@ -39,7 +37,7 @@ class CharacterActionsPanel : Panel
 
     public override void Handle(MouseEvent @event)
     {
-        foreach (var action in Actions) 
+        foreach (var action in Actions)
         {
             action.Handle(@event);
         }
@@ -47,8 +45,8 @@ class CharacterActionsPanel : Panel
 
     internal static Vector2f GetInitialPosition()
     {
-        var panelAbovePosition = CharacterInfoPanel.GetInitialPosition();
-        var panelAboveSize = CharacterInfoPanel.GetInitialSize();
+        var panelAbovePosition = ConsolePanel.GetInitialPosition();
+        var panelAboveSize = ConsolePanel.GetInitialSize();
 
         return new Vector2f(
             panelAbovePosition.X,
@@ -59,50 +57,43 @@ class CharacterActionsPanel : Panel
     internal static Vector2f GetInitialSize()
         => new Vector2f(_panelWidth, _panelHeight);
 
-    public override void Handle(ChangeContextEvent @event)
-    {
-        Context = @event.Context;
+    private Button[] GetGameActions() =>
+    [
+        GetSaveGameButton(0, 0),
+        GetLoadGameButton(1, 0),
+        GetGameStatsButton(2, 0),
+        GetGameOptionsButton(0, 1),
+        GetExitGameButton(1, 1)
+    ];
 
-        if (Context is LocationContext locationContext)
-            Actions = GetLocationContextActions(locationContext);
-    }
-
-    private Button[] GetLocationContextActions(LocationContext context) =>
-        [
-            GetRestButton(0, 0),
-            GetInventoryButton(1, 0),
-            GetDiaryButton(2, 0),
-            GetStatsButton(0, 1),
-            GetOptionsButton(1, 1)
-        ];
-
-    private Button GetRestButton(int col, int row) => new Button(
+    private Button GetSaveGameButton(int col, int row) => new Button(
         _actionButtonSize,
         new Vector2f(Position.X, Position.Y) + new Vector2f(col * _actionButtonSize.X, row * _actionButtonSize.Y),
         new Texture("assets/textures/buttons/campfire.png"),
-        callback: () => { Console.WriteLine("Rest"); });
+        callback: () => { Console.WriteLine("Save"); });
 
-    private Button GetInventoryButton(int col, int row) => new Button(
+    private Button GetLoadGameButton(int col, int row) => new Button(
         _actionButtonSize,
         new Vector2f(Position.X, Position.Y) + new Vector2f(col * _actionButtonSize.X, row * _actionButtonSize.Y),
         new Texture("assets/textures/buttons/campfire.png"),
-        callback: () => { Console.WriteLine("Inventory"); });
+        callback: () => { Console.WriteLine("Load"); });
 
-    private Button GetDiaryButton(int col, int row) => new Button(
-        _actionButtonSize,
-        new Vector2f(Position.X, Position.Y) + new Vector2f(col * _actionButtonSize.X, row * _actionButtonSize.Y),
-        new Texture("assets/textures/buttons/campfire.png"),
-        callback: () => { Console.WriteLine("Diary"); });
-
-    private Button GetStatsButton(int col, int row) => new Button(
+    private Button GetGameStatsButton(int col, int row) => new Button(
         _actionButtonSize,
         new Vector2f(Position.X, Position.Y) + new Vector2f(col * _actionButtonSize.X, row * _actionButtonSize.Y),
         new Texture("assets/textures/buttons/campfire.png"),
         callback: () => { Console.WriteLine("Stats"); });
 
-    private Button GetOptionsButton(int col, int row) => new Button(
+    private Button GetGameOptionsButton(int col, int row) => new Button(
         _actionButtonSize,
         new Vector2f(Position.X, Position.Y) + new Vector2f(col * _actionButtonSize.X, row * _actionButtonSize.Y),
         new Texture("assets/textures/buttons/campfire.png"),
         callback: () => { Console.WriteLine("Options"); });
+
+    private Button GetExitGameButton(int col, int row) => new Button(
+        _actionButtonSize,
+        new Vector2f(Position.X, Position.Y) + new Vector2f(col * _actionButtonSize.X, row * _actionButtonSize.Y),
+        new Texture("assets/textures/buttons/campfire.png"),
+        callback: () => { Console.WriteLine("Exit"); });
 }
+

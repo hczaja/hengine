@@ -15,22 +15,29 @@ internal class UserInterface :
 {
     Panel CharacterInfoPanel { get; }
     Panel CharacterActionsPanel { get; }
+    Panel ConsolePanel { get; }
+    Panel GameActionsPanel { get; }
 
     public UserInterface()
     {
         CharacterInfoPanel = new CharacterInfoPanel();
         CharacterActionsPanel = new CharacterActionsPanel(new LocationContext());
+        ConsolePanel = new ConsolePanel();
+        GameActionsPanel = new GameActionsPanel();
     }
 
     public void Draw(RenderTarget render)
     {
         CharacterInfoPanel.Draw(render);
         CharacterActionsPanel.Draw(render);
+        ConsolePanel.Draw(render);
+        GameActionsPanel.Draw(render);
     }
 
     public void Handle(MouseEvent @event)
     {
         CharacterActionsPanel.Handle(@event);
+        GameActionsPanel.Handle(@event);
     }
 
     public void Handle(KeyboardEvent @event)
