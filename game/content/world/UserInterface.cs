@@ -21,7 +21,7 @@ internal class UserInterface :
     public UserInterface()
     {
         CharacterInfoPanel = new CharacterInfoPanel();
-        CharacterActionsPanel = new CharacterActionsPanel(new LocationContext());
+        CharacterActionsPanel = new CharacterActionsPanel();
         ConsolePanel = new ConsolePanel();
         GameActionsPanel = new GameActionsPanel();
     }

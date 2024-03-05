@@ -22,10 +22,10 @@ class CharacterActionsPanel : Panel
     private IContext Context { get; set; }
     private Button[] Actions { get; set; }
 
-    public CharacterActionsPanel(IContext context)
+    public CharacterActionsPanel()
         : base(GetInitialPosition(), GetInitialSize())
     {
-        Handle(new ChangeContextEvent(context));
+        Handle(new ChangeContextEvent(new LocationContext()));
     }
 
     public override void Draw(RenderTarget render)

@@ -5,15 +5,15 @@ using SFML.System;
 
 namespace game.graphics.ui.panels;
 
-class CharacterInfoPanel : Panel
+class LocationPanel : Panel
 {
-    private static readonly float _panelWidthRatio = 0.20f;
+    private static readonly float _panelWidthRatio = 0.74f;
     private static readonly float _panelWidth = HEngineSettings.Instance.WindowWidth * _panelWidthRatio;
 
-    private static readonly float _panelHeightRatio = 0.15f;
+    private static readonly float _panelHeightRatio = 0.96f;
     private static readonly float _panelHeight = HEngineSettings.Instance.WindowHeight * _panelHeightRatio;
 
-    public CharacterInfoPanel() 
+    public LocationPanel()
         : base(GetInitialPosition(), GetInitialSize())
     {
 
@@ -21,7 +21,7 @@ class CharacterInfoPanel : Panel
 
     internal static Vector2f GetInitialPosition()
         => new Vector2f(
-            HEngineSettings.Instance.WindowWidth - HEngineSettings.Instance.SmallOffsetX - _panelWidth,
+            HEngineSettings.Instance.SmallOffsetX,
             HEngineSettings.Instance.SmallOffsetY);
 
     internal static Vector2f GetInitialSize()

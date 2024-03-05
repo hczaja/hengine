@@ -11,10 +11,10 @@ namespace game.graphics.ui.panels;
 class GameActionsPanel : Panel
 {
     private static readonly float _panelWidthRatio = 0.20f;
-    private static readonly float _panelWidth = HEngineSettings.Instance.Mode.Width * _panelWidthRatio;
+    private static readonly float _panelWidth = HEngineSettings.Instance.WindowWidth * _panelWidthRatio;
 
     private static readonly float _panelHeightRatio = 0.15f;
-    private static readonly float _panelHeight = HEngineSettings.Instance.Mode.Height * _panelHeightRatio;
+    private static readonly float _panelHeight = HEngineSettings.Instance.WindowHeight * _panelHeightRatio;
 
     private readonly Vector2f _actionButtonSize = new Vector2f(0.2f * _panelWidth, 0.5f * _panelHeight);
 

@@ -8,10 +8,10 @@ namespace game.graphics.ui.panels;
 class ConsolePanel : Panel
 {
     private static readonly float _panelWidthRatio = 0.20f;
-    private static readonly float _panelWidth = HEngineSettings.Instance.Mode.Width * _panelWidthRatio;
+    private static readonly float _panelWidth = HEngineSettings.Instance.WindowWidth * _panelWidthRatio;
 
     private static readonly float _panelHeightRatio = 0.45f;
-    private static readonly float _panelHeight = HEngineSettings.Instance.Mode.Height * _panelHeightRatio;
+    private static readonly float _panelHeight = HEngineSettings.Instance.WindowHeight * _panelHeightRatio;
 
     public ConsolePanel()
         : base(GetInitialPosition(), GetInitialSize())
