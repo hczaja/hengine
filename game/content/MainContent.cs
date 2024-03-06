@@ -9,40 +9,41 @@ namespace game.content;
 class MainContent : IContent
 {
     private UserInterface UI { get; }
-    private Location Location { get; }
+    private Composition Composition { get; }
 
     public MainContent()
     {
-        UI = new UserInterface();
-        Location = new Location();
+        UI = new UserInterface(this);
+        Composition = new Composition();
     }
 
     public void Draw(RenderTarget render)
     {
-        Location.Draw(render);
+        Composition.Draw(render);
         UI.Draw(render);
     }
 
     public void Handle(MouseEvent @event)
     {
         UI.Handle(@event);
-        Location.Handle(@event);
+        Composition.Handle(@event);
     }
 
     public void Handle(KeyboardEvent @event)
     {
         UI.Handle(@event);
-        Location.Handle(@event);
+        Composition.Handle(@event);
     }
 
     public void Update()
     {
-        Location.Update();
+        Composition.Update();
         UI.Update();
     }
 
     public void Handle(ChangeContextEvent @event)
     {
-
+        UI.Handle(@event);
+        Composition.Handle(@event);
     }
 }

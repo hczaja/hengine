@@ -1,4 +1,5 @@
 ﻿using game.context;
+using game_engine.content;
 using game_engine.context;
 using game_engine.events.input;
 using game_engine.events.system;
@@ -19,12 +20,15 @@ class CharacterActionsPanel : Panel
 
     private readonly Vector2f _actionButtonSize = new Vector2f(0.2f * _panelWidth, 0.5f * _panelHeight);
 
+    private readonly IContent _main;
+
     private IContext Context { get; set; }
     private Button[] Actions { get; set; }
 
-    public CharacterActionsPanel()
+    public CharacterActionsPanel(IContent main)
         : base(GetInitialPosition(), GetInitialSize())
     {
+        _main = main;
         Handle(new ChangeContextEvent(new LocationContext()));
     }
 
@@ -80,19 +84,20 @@ class CharacterActionsPanel : Panel
         _actionButtonSize,
         new Vector2f(Position.X, Position.Y) + new Vector2f(col * _actionButtonSize.X, row * _actionButtonSize.Y),
         new Texture("assets/textures/buttons/campfire.png"),
-        callback: () => { Console.WriteLine("Rest"); });
+        callback: () => _main.Handle(new ChangeContextEvent(new LocationContext())));
+
 
     private Button GetInventoryButton(int col, int row) => new Button(
         _actionButtonSize,
         new Vector2f(Position.X, Position.Y) + new Vector2f(col * _actionButtonSize.X, row * _actionButtonSize.Y),
         new Texture("assets/textures/buttons/campfire.png"),
-        callback: () => { Console.WriteLine("Inventory"); });
+        callback: () => _main.Handle(new ChangeContextEvent(new InventoryContext())));
 
     private Button GetDiaryButton(int col, int row) => new Button(
         _actionButtonSize,
         new Vector2f(Position.X, Position.Y) + new Vector2f(col * _actionButtonSize.X, row * _actionButtonSize.Y),
         new Texture("assets/textures/buttons/campfire.png"),
-        callback: () => { Console.WriteLine("Diary"); });
+        callback: () => _main.Handle(new ChangeContextEvent(new DiaryContext())));
 
     private Button GetStatsButton(int col, int row) => new Button(
         _actionButtonSize,

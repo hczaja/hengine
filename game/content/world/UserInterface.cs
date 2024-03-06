@@ -1,7 +1,9 @@
 ﻿using game.context;
 using game.graphics.ui.panels;
+using game_engine.content;
 using game_engine.events;
 using game_engine.events.input;
+using game_engine.events.system;
 using game_engine.graphics;
 using game_engine.graphics.ui;
 using SFML.Graphics;
@@ -11,17 +13,22 @@ namespace game.content.world;
 internal class UserInterface :
     IDrawable,
     IEventHandler<MouseEvent>,
-    IEventHandler<KeyboardEvent>
+    IEventHandler<KeyboardEvent>,
+    IEventHandler<ChangeContextEvent>
 {
+    private readonly IContent _main;
+
     Panel CharacterInfoPanel { get; }
     Panel CharacterActionsPanel { get; }
     Panel ConsolePanel { get; }
     Panel GameActionsPanel { get; }
 
-    public UserInterface()
+    public UserInterface(IContent main)
     {
+        _main = main;
+
         CharacterInfoPanel = new CharacterInfoPanel();
-        CharacterActionsPanel = new CharacterActionsPanel();
+        CharacterActionsPanel = new CharacterActionsPanel(main);
         ConsolePanel = new ConsolePanel();
         GameActionsPanel = new GameActionsPanel();
     }
@@ -48,5 +55,10 @@ internal class UserInterface :
     public void Update()
     {
 
+    }
+
+    public void Handle(ChangeContextEvent @event)
+    {
+        CharacterActionsPanel.Handle(@event);
     }
 }
