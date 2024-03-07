@@ -15,6 +15,7 @@ public abstract class Panel : RectangleShape, IDrawable, IEventHandler<MouseEven
     }
 
     public virtual void Draw(RenderTarget render) => throw new NotImplementedException();
+    public virtual new void Update() => throw new NotImplementedException();
     public virtual void Handle(MouseEvent @event) => throw new NotImplementedException();
     public virtual void Handle(ChangeContextEvent @event) => throw new NotImplementedException();
 }

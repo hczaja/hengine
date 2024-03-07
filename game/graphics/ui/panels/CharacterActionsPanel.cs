@@ -22,6 +22,7 @@ class CharacterActionsPanel : Panel
     private readonly Vector2f _actionButtonSize = new Vector2f(0.2f * _panelWidth, 0.5f * _panelHeight);
 
     private readonly IContent _main;
+    private readonly ILogger _logger;
 
     private IContext Context { get; set; }
     private Button[] Actions { get; set; }
@@ -30,13 +31,15 @@ class CharacterActionsPanel : Panel
         : base(GetInitialPosition(), GetInitialSize())
     {
         _main = main;
+        _logger = logger;
+
         Handle(new ChangeContextEvent(new LocationContext()));
     }
 
     public override void Draw(RenderTarget render)
     {
         render.Draw(this);
-        foreach (var action in Actions) 
+        foreach (var action in Actions)
         {
             render.Draw(action);
         }
@@ -44,7 +47,7 @@ class CharacterActionsPanel : Panel
 
     public override void Handle(MouseEvent @event)
     {
-        foreach (var action in Actions) 
+        foreach (var action in Actions)
         {
             action.Handle(@event);
         }
@@ -85,8 +88,10 @@ class CharacterActionsPanel : Panel
         _actionButtonSize,
         new Vector2f(Position.X, Position.Y) + new Vector2f(col * _actionButtonSize.X, row * _actionButtonSize.Y),
         new Texture("assets/textures/buttons/campfire.png"),
-        callback: () => _main.Handle(new ChangeContextEvent(new LocationContext())));
-
+        callback: () => {
+            _main.Handle(new ChangeContextEvent(new LocationContext()));
+            _logger.Log("Rest..");
+        });
 
     private Button GetInventoryButton(int col, int row) => new Button(
         _actionButtonSize,

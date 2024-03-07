@@ -1,4 +1,6 @@
-﻿using game.assets.fonts;
+﻿using game.assets;
+using game.assets.fonts;
+using game.logger;
 using game_engine.graphics.ui;
 using game_engine.logger;
 using game_engine.settings;
@@ -21,20 +23,30 @@ class ConsolePanel : Panel
     public ConsolePanel(ILogger logger)
         : base(GetInitialPosition(), GetInitialSize())
     {
+        _logger = logger;
+
+        FillColor = Palette.Instance.C07_PaleGreen;
         Text = new Text()
         {
             CharacterSize = 32,
             Font = RetroGamingFont.Instance.Font,
-            FillColor = Color.Black,
-            DisplayedString = "bla bla",
+            FillColor = Palette.Instance.C01_DarkBrown,
+            DisplayedString = "> bla bla",
             Position = Position
         };
+
+        _logger.OnLog += (_, _) => UpdateDisplay();
     }
 
     public override void Draw(RenderTarget render)
     {
         render.Draw(this);
         render.Draw(Text);
+    }
+
+    private void UpdateDisplay()
+    {
+        Text.DisplayedString = ((InGameConsoleLogger)_logger).DisplayText;
     }
 
     internal static Vector2f GetInitialPosition()
