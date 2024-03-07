@@ -6,6 +6,7 @@ using game_engine.events.input;
 using game_engine.events.system;
 using game_engine.graphics;
 using game_engine.graphics.ui;
+using game_engine.logger;
 using SFML.Graphics;
 
 namespace game.content.world;
@@ -17,19 +18,21 @@ internal class UserInterface :
     IEventHandler<ChangeContextEvent>
 {
     private readonly IContent _main;
+    private readonly ILogger _logger;
 
     Panel CharacterInfoPanel { get; }
     Panel CharacterActionsPanel { get; }
     Panel ConsolePanel { get; }
     Panel GameActionsPanel { get; }
 
-    public UserInterface(IContent main)
+    public UserInterface(IContent main, ILogger logger)
     {
         _main = main;
+        _logger = logger;
 
         CharacterInfoPanel = new CharacterInfoPanel();
-        CharacterActionsPanel = new CharacterActionsPanel(main);
-        ConsolePanel = new ConsolePanel();
+        CharacterActionsPanel = new CharacterActionsPanel(main, logger);
+        ConsolePanel = new ConsolePanel(logger);
         GameActionsPanel = new GameActionsPanel();
     }
 

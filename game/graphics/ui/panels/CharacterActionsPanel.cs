@@ -4,6 +4,7 @@ using game_engine.context;
 using game_engine.events.input;
 using game_engine.events.system;
 using game_engine.graphics.ui;
+using game_engine.logger;
 using game_engine.settings;
 using SFML.Graphics;
 using SFML.System;
@@ -25,7 +26,7 @@ class CharacterActionsPanel : Panel
     private IContext Context { get; set; }
     private Button[] Actions { get; set; }
 
-    public CharacterActionsPanel(IContent main)
+    public CharacterActionsPanel(IContent main, ILogger logger)
         : base(GetInitialPosition(), GetInitialSize())
     {
         _main = main;

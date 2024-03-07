@@ -8,6 +8,7 @@ using game.graphics.ui.panels;
 using game_engine.events.system;
 using game.context;
 using System.Collections.Generic;
+using game_engine.logger;
 
 namespace game.content.world;
 
@@ -20,7 +21,7 @@ internal class Composition :
     Stack<Panel> Panels { get; }
     Panel Top => Panels.Peek();
 
-    public Composition()
+    public Composition(ILogger logger)
     {
         Panels = new Stack<Panel>(); 
         Panels.Push(new LocationPanel());

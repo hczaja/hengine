@@ -2,19 +2,22 @@
 using game_engine.content;
 using game_engine.events.input;
 using game_engine.events.system;
+using game_engine.logger;
 using SFML.Graphics;
 
 namespace game.content;
 
 class MainContent : IContent
 {
+    private readonly ILogger _logger;
+
     private UserInterface UI { get; }
     private Composition Composition { get; }
 
-    public MainContent()
+    public MainContent(ILogger logger)
     {
-        UI = new UserInterface(this);
-        Composition = new Composition();
+        UI = new UserInterface(this, logger);
+        Composition = new Composition(logger);
     }
 
     public void Draw(RenderTarget render)
