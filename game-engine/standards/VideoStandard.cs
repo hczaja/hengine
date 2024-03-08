@@ -2,7 +2,7 @@
 
 namespace game_engine.standards;
 
-class VideoStandard
+public class VideoStandard
 {
     public VideoMode Mode { get; }
 

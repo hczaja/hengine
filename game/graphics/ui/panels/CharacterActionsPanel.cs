@@ -90,14 +90,17 @@ class CharacterActionsPanel : Panel
         new Texture("assets/textures/buttons/campfire.png"),
         callback: () => {
             _main.Handle(new ChangeContextEvent(new LocationContext()));
-            _logger.Log("Rest..");
+            _logger.Log("Location..");
         });
 
     private Button GetInventoryButton(int col, int row) => new Button(
         _actionButtonSize,
         new Vector2f(Position.X, Position.Y) + new Vector2f(col * _actionButtonSize.X, row * _actionButtonSize.Y),
         new Texture("assets/textures/buttons/campfire.png"),
-        callback: () => _main.Handle(new ChangeContextEvent(new InventoryContext())));
+        callback: () => {
+            _main.Handle(new ChangeContextEvent(new InventoryContext()));
+            _logger.Log("Inventory..");
+        });
 
     private Button GetDiaryButton(int col, int row) => new Button(
         _actionButtonSize,

@@ -18,7 +18,7 @@ namespace game.logger
 
         public void Log(string message)
         {              
-            _buffer.Append(message);
+            _buffer.AppendLine($"> {message}");
             OnLog?.Invoke(null, new EventArgs());
         }
     }

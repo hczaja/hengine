@@ -28,11 +28,13 @@ class ConsolePanel : Panel
         FillColor = Palette.Instance.C07_PaleGreen;
         Text = new Text()
         {
-            CharacterSize = 32,
+            CharacterSize = RetroGamingFont.Instance.GetConsoleFont(),
             Font = RetroGamingFont.Instance.Font,
             FillColor = Palette.Instance.C01_DarkBrown,
-            DisplayedString = "> bla bla",
-            Position = Position
+            DisplayedString = ">",
+            Position = Position + new Vector2f(HEngineSettings.Instance.SmallOffsetX / 2, HEngineSettings.Instance.SmallOffsetX / 2),
+            OutlineThickness = 1f,
+            OutlineColor = Color.White,
         };
 
         _logger.OnLog += (_, _) => UpdateDisplay();
@@ -46,7 +48,23 @@ class ConsolePanel : Panel
 
     private void UpdateDisplay()
     {
-        Text.DisplayedString = ((InGameConsoleLogger)_logger).DisplayText;
+        string text = ((InGameConsoleLogger)_logger).DisplayText;
+        
+        var chunks = text.Split(Environment.NewLine);
+        var messages = chunks.Take(chunks.Length - 1).ToArray();
+
+        var messagesLimit = RetroGamingFont.Instance.GetConsoleMaxLines();
+
+        if (messages.Length > messagesLimit)
+            text = string.Join(Environment.NewLine, messages[^messagesLimit..]);
+
+        Text.DisplayedString = text;
+    }
+
+    private void ScrollDown()
+    {
+        var messages = Text.DisplayedString.Split(Environment.NewLine);
+        Text.DisplayedString = string.Join(Environment.NewLine, messages.Skip(1));
     }
 
     internal static Vector2f GetInitialPosition()
