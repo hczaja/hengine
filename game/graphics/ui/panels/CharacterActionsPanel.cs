@@ -99,7 +99,7 @@ class CharacterActionsPanel : Panel
         new Texture("assets/textures/buttons/campfire.png"),
         callback: () => {
             _main.Handle(new ChangeContextEvent(new InventoryContext()));
-            _logger.Log("Inventory..");
+            _logger.Log("InventoryInventoryInventoryInventoryInventoryInventoryInventory");
         });
 
     private Button GetDiaryButton(int col, int row) => new Button(
