@@ -5,27 +5,30 @@ namespace game.logger
 {
     class InGameConsoleLogger : ILogger
     {
-        private readonly StringBuilder _buffer;
+        private StringBuilder buffer;
 
         public InGameConsoleLogger()
         {
-            _buffer = new StringBuilder();
-            OnLog = new EventHandler<EventArgs>((_, _) => { });
+            buffer = new StringBuilder();
+            OnLog = new EventHandler<EventArgs>((_, _) => TryClearLog());
         }
 
-        public string DisplayText => _buffer.ToString();
+        public string DisplayText => buffer.ToString();
         public EventHandler<EventArgs> OnLog { get; set; }
 
         private readonly int _charactersLimit = 20;
 
+        private readonly int _logsLimit = 5000;
+        private readonly int _logsToRemove = 2000;
+
         public void Log(string message)
         {
             var parts = SplitMessage(message);
-            _buffer.AppendLine($"> {parts.First()}");
+            buffer.AppendLine($"> {parts.First()}");
 
             foreach (var line in parts.Skip(1))
             {
-                _buffer.AppendLine($"  {line}");
+                buffer.AppendLine($"  {line}");
             }
 
             OnLog?.Invoke(null, new EventArgs());
@@ -47,6 +50,16 @@ namespace game.logger
             }
 
             return result;
+        }
+
+        private void TryClearLog()
+        {
+            if (buffer.Length > _logsLimit)
+            {
+                Console.WriteLine($"Buffer before clean: {buffer.Length}");
+                buffer = buffer.Remove(0, _logsToRemove);
+                Console.WriteLine($"Buffer after clean: {buffer.Length}");
+            }
         }
     }
 }
