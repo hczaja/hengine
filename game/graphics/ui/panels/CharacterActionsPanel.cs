@@ -71,11 +71,11 @@ class CharacterActionsPanel : Panel
     {
         Context = @event.Context;
 
-        if (Context is LocationContext locationContext)
-            Actions = GetLocationContextActions(locationContext);
+        if (Context is LocationContext)
+            Actions = GetLocationContextActions();
     }
 
-    private Button[] GetLocationContextActions(LocationContext context) =>
+    private Button[] GetLocationContextActions() =>
         [
             GetRestButton(0, 0),
             GetInventoryButton(1, 0),

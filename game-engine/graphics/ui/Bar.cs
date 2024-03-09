@@ -10,7 +10,7 @@ public class Bar : RectangleShape, IDrawable
     private float MaxLength { get; set; }
     private Text Text { get; set; }
 
-    public Bar(Vector2f position, float length, float height, Color color, float startValue, float maxValue) : base(new Vector2f(0f, height))
+    public Bar(Vector2f position, float length, float height, Color color, float startValue, float maxValue) : base(new Vector2f(length * (startValue / maxValue), height))
     {
         Position = position;
         FillColor = color;
@@ -22,6 +22,7 @@ public class Bar : RectangleShape, IDrawable
 
     public void Draw(RenderTarget render)
     {
-        throw new NotImplementedException();
+        render.Draw(this);
+        //render.Draw(Text);
     }
 }

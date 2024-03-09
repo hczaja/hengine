@@ -11,7 +11,7 @@ class RetroGamingFont
 
     public Font Font { get; } = new Font("assets/fonts/Retro Gaming.ttf");
 
-    public uint GetConsoleFont()
+    public uint GetConsoleFontSize()
     {
         var mode = HEngineSettings.Instance.Mode;
 

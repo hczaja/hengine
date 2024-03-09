@@ -28,7 +28,7 @@ class ConsolePanel : Panel
         FillColor = Palette.Instance.C07_PaleGreen;
         Text = new Text()
         {
-            CharacterSize = RetroGamingFont.Instance.GetConsoleFont(),
+            CharacterSize = RetroGamingFont.Instance.GetConsoleFontSize(),
             Font = RetroGamingFont.Instance.Font,
             FillColor = Palette.Instance.C01_DarkBrown,
             DisplayedString = ">",
