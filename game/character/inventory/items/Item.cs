@@ -1,6 +1,10 @@
 ﻿namespace game.character.inventory.items;
 
-class Item
+abstract class Item
 {
-    private readonly Guid id;
+    public string Name { get; }
+    public ItemType Type { get; }
+
+    public Item(string name, ItemType type)
+        => (Name, Type) = (name, type);
 }

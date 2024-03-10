@@ -27,8 +27,8 @@ class CharacterInfoPanel : Panel
     private readonly ICharacter _character;
     
     private RectangleShape Avatar { get; }
-    private Bar HealthBar { get; }
-    private Bar EnergyBar { get; }
+    private BaseBar HealthBar { get; }
+    private BaseBar EnergyBar { get; }
     private ICollection<CharacteristicBlock> Characetristics { get; }
 
     public CharacterInfoPanel(ICharacter character) 

@@ -8,6 +8,7 @@ using game_engine.events.system;
 using game.context;
 using game_engine.logger;
 using game.character;
+using game.graphics.ui.panels.inventory;
 
 namespace game.content.world;
 

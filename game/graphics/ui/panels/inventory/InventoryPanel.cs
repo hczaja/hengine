@@ -4,7 +4,7 @@ using game_engine.settings;
 using SFML.Graphics;
 using SFML.System;
 
-namespace game.graphics.ui.panels;
+namespace game.graphics.ui.panels.inventory;
 
 class InventoryPanel : Panel
 {
@@ -16,11 +16,17 @@ class InventoryPanel : Panel
 
     private readonly IInventory _inventory;
 
+    private BackpackPanel Backpack { get; }
+    private EquipedItemsPanel EquipedItems { get; }
+
     public InventoryPanel(IInventory inventory)
         : base(GetInitialPosition(), GetInitialSize())
     {
         _inventory = inventory;
-        
+
+        Backpack = new BackpackPanel();
+        EquipedItems = new EquipedItemsPanel();
+
         FillColor = Color.Red;
     }
 
@@ -35,5 +41,8 @@ class InventoryPanel : Panel
     public override void Draw(RenderTarget render)
     {
         render.Draw(this);
+
+        EquipedItems.Draw(render);
+        Backpack.Draw(render);
     }
 }
