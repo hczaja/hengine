@@ -1,4 +1,5 @@
-﻿using game_engine.graphics.ui;
+﻿using game.character.inventory;
+using game_engine.graphics.ui;
 using game_engine.settings;
 using SFML.Graphics;
 using SFML.System;
@@ -13,10 +14,14 @@ class InventoryPanel : Panel
     private static readonly float _panelHeightRatio = 0.96f;
     private static readonly float _panelHeight = HEngineSettings.Instance.WindowHeight * _panelHeightRatio;
 
-    public InventoryPanel()
+    private readonly IInventory _inventory;
+
+    public InventoryPanel(IInventory inventory)
         : base(GetInitialPosition(), GetInitialSize())
     {
-        this.FillColor = Color.Red;
+        _inventory = inventory;
+        
+        FillColor = Color.Red;
     }
 
     internal static Vector2f GetInitialPosition()

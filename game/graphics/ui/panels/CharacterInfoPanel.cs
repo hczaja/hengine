@@ -31,72 +31,85 @@ class CharacterInfoPanel : Panel
     private Bar EnergyBar { get; }
     private ICollection<CharacteristicBlock> Characetristics { get; }
 
-    public CharacterInfoPanel(/*ICharacter character*/) 
+    public CharacterInfoPanel(ICharacter character) 
         : base(GetInitialPosition(), GetInitialSize())
     {
-        //_character = character;
+        _character = character;
+
         Avatar = new RectangleShape(
             new Vector2f(_panelWidth / 3f, _panelHeight))
         {
             Position = Position + new Vector2f(_barLength, 0f),
-            Texture = new Texture("assets/textures/avatars/cat.png")
+            Texture = character.Avatar
         };
 
         FillColor = Palette.Instance.C07_PaleGreen;
 
-        HealthBar = new Bar(Position, _barLength, _barHeight, Palette.Instance.C02_DirtyRed, 20f, 50f);
-        EnergyBar = new Bar(HealthBar.Position + new Vector2f(0f, _barHeight), _barLength, _barHeight, Palette.Instance.C09_PaleYellow, 25f, 50f);
+        HealthBar = new Bar(
+            Position, 
+            _barLength, 
+            _barHeight, 
+            Palette.Instance.C02_DirtyRed, 
+            character.Statistics.GetHealth(), 
+            character.Statistics.MaxHealth);
 
-        Characetristics = GetCharacteristics();
+        EnergyBar = new Bar(
+            HealthBar.Position + new Vector2f(0f, _barHeight), 
+            _barLength, 
+            _barHeight, 
+            Palette.Instance.C09_PaleYellow, 
+            character.Statistics.GetEnergy(), 
+            character.Statistics.MaxEnergy);
+
+        Characetristics = GetCharacteristics(character.Statistics);
     }
 
-    private CharacteristicBlock[] GetCharacteristics() =>
+    private CharacteristicBlock[] GetCharacteristics(ICharacterStatistics stats) =>
     [
-        GetStrengthBlock(0, 0),
-        GetDexterityBlock(1, 0),
-        GetEnduranceBlock(2, 0),
-        GetCharismaBlock(0, 1),
-        GetWisdomBlock(1, 1),
-        GetInteligenceBlock(2, 1)
+        GetStrengthBlock(0, 0, stats.Strength),
+        GetDexterityBlock(1, 0, stats.Dexterity),
+        GetEnduranceBlock(2, 0, stats.Endurance),
+        GetCharismaBlock(0, 1, stats.Charisma),
+        GetWisdomBlock(1, 1, stats.Wisdom),
+        GetInteligenceBlock(2, 1, stats.Inteligence)
     ];
 
-    private CharacteristicBlock GetStrengthBlock(int col, int row) => new CharacteristicBlock(
+    private CharacteristicBlock GetStrengthBlock(int col, int row, int value) => new CharacteristicBlock(
         _blockSize,
         Position + new Vector2f(0f, 2f * _barHeight) + new Vector2f(col * _blockSize.X, row * _blockSize.Y),
         new Texture("assets/textures/buttons/campfire.png"),
-        1
+        value
     );
-    private CharacteristicBlock GetDexterityBlock(int col, int row) => new CharacteristicBlock(
+    private CharacteristicBlock GetDexterityBlock(int col, int row, int value) => new CharacteristicBlock(
         _blockSize,
         Position + new Vector2f(0f, 2f * _barHeight) + new Vector2f(col * _blockSize.X, row * _blockSize.Y),
         new Texture("assets/textures/buttons/campfire.png"),
-        2
+        value
     );
-    private CharacteristicBlock GetEnduranceBlock(int col, int row) => new CharacteristicBlock(
+    private CharacteristicBlock GetEnduranceBlock(int col, int row, int value) => new CharacteristicBlock(
         _blockSize,
         Position + new Vector2f(0f, 2f * _barHeight) + new Vector2f(col * _blockSize.X, row * _blockSize.Y),
         new Texture("assets/textures/buttons/campfire.png"),
-        3
+        value
     );
-    private CharacteristicBlock GetCharismaBlock(int col, int row) => new CharacteristicBlock(
+    private CharacteristicBlock GetCharismaBlock(int col, int row, int value) => new CharacteristicBlock(
         _blockSize,
         Position + new Vector2f(0f, 2f * _barHeight) + new Vector2f(col * _blockSize.X, row * _blockSize.Y),
         new Texture("assets/textures/buttons/campfire.png"),
-        4
+        value
     );
-    private CharacteristicBlock GetWisdomBlock(int col, int row) => new CharacteristicBlock(
+    private CharacteristicBlock GetWisdomBlock(int col, int row, int value) => new CharacteristicBlock(
         _blockSize,
         Position + new Vector2f(0f, 2f * _barHeight) + new Vector2f(col * _blockSize.X, row * _blockSize.Y),
         new Texture("assets/textures/buttons/campfire.png"),
-        5
+        value
     );
-    private CharacteristicBlock GetInteligenceBlock(int col, int row) => new CharacteristicBlock(
+    private CharacteristicBlock GetInteligenceBlock(int col, int row, int value) => new CharacteristicBlock(
         _blockSize,
         Position + new Vector2f(0f, 2f * _barHeight) + new Vector2f(col * _blockSize.X, row * _blockSize.Y),
         new Texture("assets/textures/buttons/campfire.png"),
-        6
+        value
     );
-
 
     internal static Vector2f GetInitialPosition()
         => new Vector2f(

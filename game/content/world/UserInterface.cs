@@ -1,4 +1,5 @@
-﻿using game.context;
+﻿using game.character;
+using game.context;
 using game.graphics.ui.panels;
 using game_engine.content;
 using game_engine.events;
@@ -20,17 +21,21 @@ internal class UserInterface :
     private readonly IContent _main;
     private readonly ILogger _logger;
 
+    private readonly ICharacter _character;
+
     Panel CharacterInfoPanel { get; }
     Panel CharacterActionsPanel { get; }
     Panel ConsolePanel { get; }
     Panel GameActionsPanel { get; }
 
-    public UserInterface(IContent main, ILogger logger)
+    public UserInterface(IContent main, ILogger logger, ICharacter character)
     {
         _main = main;
         _logger = logger;
 
-        CharacterInfoPanel = new CharacterInfoPanel();
+        _character = character;
+
+        CharacterInfoPanel = new CharacterInfoPanel(character);
         CharacterActionsPanel = new CharacterActionsPanel(main, logger);
         ConsolePanel = new ConsolePanel(logger);
         GameActionsPanel = new GameActionsPanel();

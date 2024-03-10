@@ -2,13 +2,12 @@
 using game_engine.events;
 using game_engine.graphics;
 using SFML.Graphics;
-using game_engine.context;
 using game_engine.graphics.ui;
 using game.graphics.ui.panels;
 using game_engine.events.system;
 using game.context;
-using System.Collections.Generic;
 using game_engine.logger;
+using game.character;
 
 namespace game.content.world;
 
@@ -21,8 +20,14 @@ internal class Composition :
     Stack<Panel> Panels { get; }
     Panel Top => Panels.Peek();
 
-    public Composition(ILogger logger)
+    private readonly ILogger _logger;
+    private readonly ICharacter _character;
+
+    public Composition(ILogger logger, ICharacter mainCharacter)
     {
+        _logger = logger;
+        _character = mainCharacter;
+
         Panels = new Stack<Panel>(); 
         Panels.Push(new LocationPanel());
     }
@@ -63,7 +68,7 @@ internal class Composition :
 
         if (context is InventoryContext && current is not InventoryPanel)
         {
-            Panels.Push(new InventoryPanel());
+            Panels.Push(new InventoryPanel(_character.Inventory));
             return;
         }
 
