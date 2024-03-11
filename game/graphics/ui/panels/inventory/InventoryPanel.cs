@@ -24,10 +24,10 @@ class InventoryPanel : Panel
     {
         _inventory = inventory;
 
-        Backpack = new BackpackPanel();
+        Backpack = new BackpackPanel(inventory);
         EquipedItems = new EquipedItemsPanel();
 
-        FillColor = Color.Red;
+        FillColor = Color.Black;
     }
 
     internal static Vector2f GetInitialPosition()

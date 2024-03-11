@@ -10,6 +10,9 @@ class CharacteristicBlock : IDrawable
 {
     public Vector2f Postion { get; }
     public Vector2f Size { get; }
+    private RectangleShape Icon { get; set; }
+    private Text Text { get; set; }
+    public int Value { get; private set; }
 
     public CharacteristicBlock(Vector2f size, Vector2f position, Texture icon, int startValue)
     {
@@ -35,10 +38,6 @@ class CharacteristicBlock : IDrawable
             OutlineColor = Color.White,
         };
     }
-
-    private RectangleShape Icon { get; set; }
-    private Text Text { get; set; }
-    public int Value { get; private set; }
 
     public void Draw(RenderTarget render)
     {

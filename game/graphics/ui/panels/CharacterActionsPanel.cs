@@ -1,4 +1,5 @@
-﻿using game.context;
+﻿using game.assets;
+using game.context;
 using game_engine.content;
 using game_engine.context;
 using game_engine.events.input;
@@ -32,6 +33,8 @@ class CharacterActionsPanel : Panel
     {
         _main = main;
         _logger = logger;
+
+        FillColor = Palette.Instance.C07_PaleGreen;
 
         Handle(new ChangeContextEvent(new LocationContext()));
     }

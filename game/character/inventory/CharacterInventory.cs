@@ -9,7 +9,17 @@ class CharacterInventory : IInventory
         //Backpack = new 
     }
 
-    public IEnumerable<Item> Backpack => throw new NotImplementedException();
+    public IEnumerable<Item> Backpack { get; } = new List<Item>()
+    {
+        new Item("test", ItemType.Valueable),
+        new Item("test2", ItemType.Valueable),
+        new Item("test", ItemType.Valueable),
+        new Item("test2", ItemType.Valueable),
+        new Item("test", ItemType.Valueable),
+        new Item("test2", ItemType.Valueable),
+        new Item("test", ItemType.Valueable),
+        new Item("test2", ItemType.Valueable)
+    };
 
     public Item Weapon => throw new NotImplementedException();
 

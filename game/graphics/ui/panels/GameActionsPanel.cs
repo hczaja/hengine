@@ -1,4 +1,5 @@
-﻿using game.context;
+﻿using game.assets;
+using game.context;
 using game_engine.events.input;
 using game_engine.events.system;
 using game_engine.graphics.ui;
@@ -23,6 +24,8 @@ class GameActionsPanel : Panel
     public GameActionsPanel()
         : base(GetInitialPosition(), GetInitialSize())
     {
+        FillColor = Palette.Instance.C07_PaleGreen;
+
         Actions = GetGameActions();
     }
 

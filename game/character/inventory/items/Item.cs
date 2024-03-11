@@ -1,10 +1,19 @@
-﻿namespace game.character.inventory.items;
+﻿using SFML.Graphics;
 
-abstract class Item
+namespace game.character.inventory.items;
+
+class Item
 {
     public string Name { get; }
     public ItemType Type { get; }
 
+    public Texture Texture { get; }
+
     public Item(string name, ItemType type)
-        => (Name, Type) = (name, type);
+    {
+        Name = name;
+        Type = type;
+
+        Texture = new Texture("assets/textures/buttons/campfire.png");
+    }
 }

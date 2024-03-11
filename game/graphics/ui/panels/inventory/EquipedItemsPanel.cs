@@ -1,4 +1,5 @@
-﻿using game_engine.graphics.ui;
+﻿using game.assets;
+using game_engine.graphics.ui;
 using game_engine.settings;
 using SFML.Graphics;
 using SFML.System;
@@ -17,7 +18,7 @@ class EquipedItemsPanel : Panel
     public EquipedItemsPanel()
         : base(GetInitialPosition(), GetInitialSize())
     {
-        FillColor = Color.White;
+        FillColor = Palette.Instance.C07_PaleGreen;
     }
 
     internal static Vector2f GetInitialPosition()
