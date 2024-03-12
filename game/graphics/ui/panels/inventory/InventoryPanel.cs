@@ -25,7 +25,7 @@ class InventoryPanel : Panel
         _inventory = inventory;
 
         Backpack = new BackpackPanel(inventory);
-        EquipedItems = new EquipedItemsPanel();
+        EquipedItems = new EquipedItemsPanel(inventory);
 
         FillColor = Color.Black;
     }

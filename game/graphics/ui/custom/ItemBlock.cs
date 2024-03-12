@@ -18,7 +18,7 @@ class ItemBlock : IDrawable
         Icon = new RectangleShape(new Vector2f(size.X, size.Y))
         {
             Position = position,
-            Texture = icon
+            Texture = icon,
         };
     }
 

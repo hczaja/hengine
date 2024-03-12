@@ -1,4 +1,7 @@
 ﻿using game.assets;
+using game.assets.textures;
+using game.character.inventory;
+using game.graphics.ui.custom;
 using game_engine.graphics.ui;
 using game_engine.settings;
 using SFML.Graphics;
@@ -14,11 +17,19 @@ class EquipedItemsPanel : Panel
     private static readonly float _panelHeightRatio = 0.66f;
     private static readonly float _panelHeight = InventoryPanel.GetInitialSize().Y * _panelHeightRatio;
 
+    private ItemBlock ArmourBlock { get; }
+    private ItemBlock WeaponBlock { get; }
+    private ItemBlock BootsBlock { get; }
 
-    public EquipedItemsPanel()
+    public EquipedItemsPanel(IInventory inventory)
         : base(GetInitialPosition(), GetInitialSize())
     {
         FillColor = Palette.Instance.C07_PaleGreen;
+
+        ArmourBlock = new ItemBlock(
+            new Vector2f(BackpackPanel._itemBlockWidth, BackpackPanel._itemBlockHeight),
+            Position,
+            TextureStorage.Instance.NoItemTexture.Value);
     }
 
     internal static Vector2f GetInitialPosition()
@@ -36,5 +47,6 @@ class EquipedItemsPanel : Panel
     public override void Draw(RenderTarget render)
     {
         render.Draw(this);
+        ArmourBlock.Draw(render);
     }
 }

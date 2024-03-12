@@ -18,13 +18,13 @@ class BackpackPanel : Panel
     private static readonly float _panelHeightRatio = 0.96f;
     private static readonly float _panelHeight = InventoryPanel.GetInitialSize().Y * _panelHeightRatio;
 
-    private static readonly float _itemBlockWidth = (1f / 5f) * _panelWidth;
-    private static readonly float _itemBlockHeight = (1f / 5f) * _panelHeight;
+    private static readonly int _maxColumns = 5;
+    private static readonly int _maxRows = 5;
+    
+    public static readonly float _itemBlockWidth = (1f / _maxColumns) * _panelWidth;
+    public static readonly float _itemBlockHeight = (1f / _maxRows) * _panelHeight;
 
     private IEnumerable<ItemBlock> Blocks { get; }
-
-    private int MaxColumns = 5;
-    private int MaxRows = 5;
 
     public BackpackPanel(IInventory inventory)
         : base(GetInitialPosition(), GetInitialSize())
@@ -47,7 +47,7 @@ class BackpackPanel : Panel
                 item.Texture));
 
             column++;
-            if (column == MaxColumns)
+            if (column == _maxColumns)
             {
                 column = 0;
                 row++;

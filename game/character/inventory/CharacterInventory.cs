@@ -21,16 +21,16 @@ class CharacterInventory : IInventory
         new Item("test2", ItemType.Valueable)
     };
 
-    public Item Weapon => throw new NotImplementedException();
+    public Item Weapon => null;
 
-    public Item Armour => throw new NotImplementedException();
+    public Item Armour => null;
 
-    public Item Boots => throw new NotImplementedException();
+    public Item Boots => new Item("test", ItemType.Boots);
 
-    public float MaxCapacity => throw new NotImplementedException();
+    public float MaxCapacity => 10f;
 
     public float GetCapacity()
     {
-        throw new NotImplementedException();
+        return Backpack.Count();
     }
 }
