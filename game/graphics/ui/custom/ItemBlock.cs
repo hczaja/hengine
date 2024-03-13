@@ -26,4 +26,17 @@ class ItemBlock : IDrawable
     {
         render.Draw(Icon);
     }
+
+    public void TurnActive(bool turn)
+    {
+        if (turn)
+        {
+            Icon.OutlineThickness = 4;
+            Icon.OutlineColor = Color.White;
+        }
+        else
+        {
+            Icon.OutlineThickness = 0;
+        }
+    }
 }

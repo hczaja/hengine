@@ -3,10 +3,13 @@ using game.character;
 using game.character.inventory;
 using game.character.inventory.items;
 using game.graphics.ui.custom;
+using game_engine.events;
+using game_engine.events.input;
 using game_engine.graphics.ui;
 using game_engine.settings;
 using SFML.Graphics;
 using SFML.System;
+using SFML.Window;
 
 namespace game.graphics.ui.panels.inventory;
 
@@ -24,14 +27,21 @@ class BackpackPanel : Panel
     public static readonly float _itemBlockWidth = (1f / _maxColumns) * _panelWidth;
     public static readonly float _itemBlockHeight = (1f / _maxRows) * _panelHeight;
 
+    private readonly IEventHandler<ChangeActiveInventoryItemEvent> _parent;
+
     private IEnumerable<ItemBlock> Blocks { get; }
 
-    public BackpackPanel(IInventory inventory)
+    ItemBlock ActiveItem { get; set; }
+
+    public BackpackPanel(IInventory inventory, IEventHandler<ChangeActiveInventoryItemEvent> handler)
         : base(GetInitialPosition(), GetInitialSize())
     {
-        FillColor = Palette.Instance.C07_PaleGreen;
+        _parent = handler;
 
+        FillColor = Palette.Instance.C07_PaleGreen;
         Blocks = GetBlocks(inventory.Backpack);
+
+        ActiveItem = Blocks.FirstOrDefault();
     }
 
     private IEnumerable<ItemBlock> GetBlocks(IEnumerable<Item> backpack)
@@ -74,10 +84,31 @@ class BackpackPanel : Panel
     internal static Vector2f GetInitialSize()
         => new Vector2f(_panelWidth, _panelHeight);
 
+    public override void Handle(KeyboardEvent @event)
+    {
+        if (@event.key == Keyboard.Key.Right)
+        {
+            for (int i = 0; i < Blocks.Count(); i++)
+            {
+                if (Blocks.ElementAt(i) == ActiveItem)
+                {
+                    ActiveItem.TurnActive(false);
+
+                    ActiveItem = Blocks.ElementAt(i + 1);
+                    ActiveItem.TurnActive(true);
+
+                    break;
+                }
+            }
+        }
+    }
+
     public override void Draw(RenderTarget render)
     {
         render.Draw(this);
         foreach (var itemBlock in Blocks)
             itemBlock.Draw(render);
     }
+
+    internal ItemBlock GetActiveItem() => ActiveItem;
 }

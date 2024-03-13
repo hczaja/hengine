@@ -50,7 +50,7 @@ internal class Composition :
 
     public void Handle(KeyboardEvent @event)
     {
-
+        Top.Handle(@event);
     }
 
     public void Handle(ChangeContextEvent @event)
