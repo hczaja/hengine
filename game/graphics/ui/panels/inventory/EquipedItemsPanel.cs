@@ -8,6 +8,7 @@ using game_engine.graphics.ui;
 using game_engine.settings;
 using SFML.Graphics;
 using SFML.System;
+using SFML.Window;
 
 namespace game.graphics.ui.panels.inventory;
 
@@ -19,37 +20,59 @@ class EquipedItemsPanel : Panel
     private static readonly float _panelHeightRatio = 0.66f;
     private static readonly float _panelHeight = InventoryPanel.GetInitialSize().Y * _panelHeightRatio;
 
+    private readonly IInventory _inventory;
     private readonly IEventHandler<ChangeActiveInventoryItemEvent> _parent;
 
-    private ItemBlock ArmourBlock { get; }
-    private ItemBlock WeaponBlock { get; }
-    private ItemBlock BootsBlock { get; }
-
-    ItemBlock ActiveItem { get; set; }
+    private IEnumerable<ItemBlock> Equiped { get; }
+    public ItemBlock Pointer { get; private set; }
 
     public EquipedItemsPanel(IInventory inventory, IEventHandler<ChangeActiveInventoryItemEvent> handler)
         : base(GetInitialPosition(), GetInitialSize())
     {
+        _inventory = inventory;
         _parent = handler;
 
         FillColor = Palette.Instance.C07_PaleGreen;
 
-        ArmourBlock = new ItemBlock(
-            new Vector2f(BackpackPanel._itemBlockWidth, BackpackPanel._itemBlockHeight),
-            Position,
-            TextureStorage.Instance.NoItemTexture.Value);
+        Equiped = GetBlocks(inventory);
+        Pointer = null;
+    }
 
-        WeaponBlock = new ItemBlock(
-            new Vector2f(BackpackPanel._itemBlockWidth, BackpackPanel._itemBlockHeight),
-            Position + new Vector2f(0f, BackpackPanel._itemBlockHeight),
-            TextureStorage.Instance.NoItemTexture.Value);
+    private IEnumerable<ItemBlock> GetBlocks(IInventory inventory)
+    {
+        var result = new List<ItemBlock>();
 
-        BootsBlock = new ItemBlock(
-            new Vector2f(BackpackPanel._itemBlockWidth, BackpackPanel._itemBlockHeight),
-            Position + new Vector2f(0f, 2 * BackpackPanel._itemBlockHeight),
-            TextureStorage.Instance.NoItemTexture.Value);
+        if (inventory.Armour is not null)
+        {
+            var armourBlock = new ItemBlock(
+                new Vector2f(BackpackPanel._itemBlockWidth, BackpackPanel._itemBlockHeight),
+                Position,
+                TextureStorage.Instance.NoItemTexture.Value);
 
-        ActiveItem = ArmourBlock;
+            result.Add(armourBlock);
+        }
+
+        if (inventory.Weapon is not null)
+        {
+            var weaponBlock = new ItemBlock(
+                new Vector2f(BackpackPanel._itemBlockWidth, BackpackPanel._itemBlockHeight),
+                Position + new Vector2f(0f, BackpackPanel._itemBlockHeight),
+                TextureStorage.Instance.NoItemTexture.Value);
+
+            result.Add(weaponBlock);
+        }
+
+        if (inventory.Boots is not null)
+        {
+            var bootsBlock = new ItemBlock(
+                new Vector2f(BackpackPanel._itemBlockWidth, BackpackPanel._itemBlockHeight),
+                Position + new Vector2f(0f, 2 * BackpackPanel._itemBlockHeight),
+                TextureStorage.Instance.NoItemTexture.Value);
+
+            result.Add(bootsBlock);
+        }
+
+        return result;
     }
 
     internal static Vector2f GetInitialPosition()
@@ -66,16 +89,66 @@ class EquipedItemsPanel : Panel
 
     public override void Handle(KeyboardEvent @event)
     {
+        if (Equiped.Count() == 0)
+        {
+            Pointer = null;
+            return;
+        }
 
+        if (@event.key == Keyboard.Key.Up)
+        {
+            if (Pointer is null)
+            {
+                Pointer = Equiped.First();
+            }
+            else
+            {
+                int index = GetIndexOfPointer();
+                var prev = Equiped.ElementAtOrDefault(index - 1);
+
+                if (prev is not null)
+                    Pointer = prev;
+            }
+        }
+        else if (@event.key == Keyboard.Key.Down)
+        {
+            if (Pointer is null)
+            {
+                Pointer = Equiped.First();
+            }
+            else
+            {
+                int index = GetIndexOfPointer();
+                var nextItem = Equiped.ElementAtOrDefault(index + 1);
+
+                if (nextItem is not null)
+                    Pointer = nextItem;
+            }
+        }
+
+        _parent.Handle(new ChangeActiveInventoryItemEvent(Pointer));
+    }
+
+    private int GetIndexOfPointer()
+    {
+        int index = 0;
+        foreach (var item in Equiped)
+        {
+            if (item == Pointer)
+            {
+                break;
+            }
+
+            index++;
+        }
+
+        return index;
     }
 
     public override void Draw(RenderTarget render)
     {
         render.Draw(this);
-        ArmourBlock.Draw(render);
-        WeaponBlock.Draw(render);
-        BootsBlock.Draw(render);
+        foreach (var item in Equiped)
+            item.Draw(render);
     }
-
-    internal ItemBlock GetActiveItem() => ActiveItem;
 }

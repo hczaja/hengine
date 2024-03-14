@@ -36,7 +36,11 @@ class InventoryPanel : Panel, IEventHandler<ChangeActiveInventoryItemEvent>
         EquipedItems = new EquipedItemsPanel(inventory, this);
 
         ActivePanel = EquipedItems;
-        ActiveItem = null;
+
+        ActivePanel.OutlineColor = Color.White;
+        ActivePanel.OutlineThickness = 4f;
+
+        ActiveItem = EquipedItems.Pointer;
 
         FillColor = Color.Black;
     }
@@ -51,18 +55,27 @@ class InventoryPanel : Panel, IEventHandler<ChangeActiveInventoryItemEvent>
 
     public override void Handle(KeyboardEvent @event)
     {
+        if (@event.Type == KeyboardEventType.Released)
+            return;
+
         if (@event.key == Keyboard.Key.Tab)
         {
+            ActivePanel.OutlineThickness = 0f;
+            ActiveItem.TurnActive(false);
+
             if (Backpack == ActivePanel)
             {
                 ActivePanel = EquipedItems;
-                ActiveItem = EquipedItems.GetActiveItem();
+                ActiveItem = EquipedItems.Pointer;
             }
             else
             {
                 ActivePanel = Backpack;
-                ActiveItem = Backpack.GetActiveItem();
+                ActiveItem = Backpack.Pointer;
             }
+
+            ActivePanel.OutlineColor = Color.White;
+            ActivePanel.OutlineThickness = 4f;
         }
         else if (@event.key == Keyboard.Key.Enter)
         {
@@ -90,7 +103,12 @@ class InventoryPanel : Panel, IEventHandler<ChangeActiveInventoryItemEvent>
 
         if (ActivePanel is not null)
         {
-            //
+            
+        }
+
+        if (ActiveItem is not null)
+        {
+            ActiveItem.Draw(render);
         }
     }
 
@@ -98,11 +116,15 @@ class InventoryPanel : Panel, IEventHandler<ChangeActiveInventoryItemEvent>
     {
         if (Backpack == ActivePanel)
         {
-            ActiveItem = Backpack.GetActiveItem();
+            ActiveItem?.TurnActive(false);
+            ActiveItem = Backpack.Pointer;
+            ActiveItem.TurnActive(true);
         }
         else
         {
-            ActiveItem = EquipedItems.GetActiveItem();
+            ActiveItem?.TurnActive(false);
+            ActiveItem = EquipedItems.Pointer;
+            ActiveItem.TurnActive(true);
         }
     }
 }

@@ -10,7 +10,6 @@ interface IInventory
     Item Armour { get; }
     Item Boots { get; }
 
-
     float GetCapacity();
     float MaxCapacity { get; }
 }

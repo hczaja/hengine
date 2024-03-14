@@ -27,21 +27,22 @@ class BackpackPanel : Panel
     public static readonly float _itemBlockWidth = (1f / _maxColumns) * _panelWidth;
     public static readonly float _itemBlockHeight = (1f / _maxRows) * _panelHeight;
 
+    private readonly IInventory _inventory;
     private readonly IEventHandler<ChangeActiveInventoryItemEvent> _parent;
-
-    private IEnumerable<ItemBlock> Blocks { get; }
-
-    ItemBlock ActiveItem { get; set; }
+    
+    private IEnumerable<ItemBlock> Backpack { get; }
+    public ItemBlock Pointer { get; private set; }
 
     public BackpackPanel(IInventory inventory, IEventHandler<ChangeActiveInventoryItemEvent> handler)
         : base(GetInitialPosition(), GetInitialSize())
     {
+        _inventory = inventory;
         _parent = handler;
 
         FillColor = Palette.Instance.C07_PaleGreen;
-        Blocks = GetBlocks(inventory.Backpack);
 
-        ActiveItem = Blocks.FirstOrDefault();
+        Backpack = GetBlocks(inventory.Backpack);
+        Pointer = null;
     }
 
     private IEnumerable<ItemBlock> GetBlocks(IEnumerable<Item> backpack)
@@ -86,29 +87,66 @@ class BackpackPanel : Panel
 
     public override void Handle(KeyboardEvent @event)
     {
-        if (@event.key == Keyboard.Key.Right)
+        if (Backpack.Count() == 0)
         {
-            for (int i = 0; i < Blocks.Count(); i++)
+            Pointer = null;
+            return;
+        }
+
+        if (@event.key == Keyboard.Key.Left)
+        {
+            if (Pointer is null)
             {
-                if (Blocks.ElementAt(i) == ActiveItem)
-                {
-                    ActiveItem.TurnActive(false);
+                Pointer = Backpack.First();
+            }
+            else
+            {
+                int index = GetIndexOfPointer();
+                var prev = Backpack.ElementAtOrDefault(index - 1);
 
-                    ActiveItem = Blocks.ElementAt(i + 1);
-                    ActiveItem.TurnActive(true);
-
-                    break;
-                }
+                if (prev is not null)
+                    Pointer = prev;
             }
         }
+        else if (@event.key == Keyboard.Key.Right)
+        {
+            if (Pointer is null)
+            {
+                Pointer = Backpack.First();
+            }
+            else
+            {
+                int index = GetIndexOfPointer();
+                var next = Backpack.ElementAtOrDefault(index + 1);
+
+                if (next is not null)
+                    Pointer = next;
+            }
+        }
+
+        _parent.Handle(new ChangeActiveInventoryItemEvent(Pointer));
+    }
+
+    private int GetIndexOfPointer()
+    {
+        int index = 0;
+        foreach (var item in Backpack)
+        {
+            if (item == Pointer)
+            {
+                break;
+            }
+
+            index++;
+        }
+
+        return index;
     }
 
     public override void Draw(RenderTarget render)
     {
         render.Draw(this);
-        foreach (var itemBlock in Blocks)
+        foreach (var itemBlock in Backpack)
             itemBlock.Draw(render);
     }
-
-    internal ItemBlock GetActiveItem() => ActiveItem;
 }
