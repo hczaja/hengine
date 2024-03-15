@@ -40,6 +40,7 @@ class BackpackPanel : Panel
         _parent = handler;
 
         FillColor = Palette.Instance.C07_PaleGreen;
+        OutlineColor = Color.White;
 
         Backpack = GetBlocks(inventory.Backpack);
         Pointer = null;

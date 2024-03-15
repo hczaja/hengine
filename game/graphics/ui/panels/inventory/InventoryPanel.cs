@@ -35,14 +35,13 @@ class InventoryPanel : Panel, IEventHandler<ChangeActiveInventoryItemEvent>
         Backpack = new BackpackPanel(inventory, this);
         EquipedItems = new EquipedItemsPanel(inventory, this);
 
+        FillColor = Color.Black;
+
         ActivePanel = EquipedItems;
 
-        ActivePanel.OutlineColor = Color.White;
         ActivePanel.OutlineThickness = 4f;
 
         ActiveItem = EquipedItems.Pointer;
-
-        FillColor = Color.Black;
     }
 
     internal static Vector2f GetInitialPosition()
@@ -61,12 +60,13 @@ class InventoryPanel : Panel, IEventHandler<ChangeActiveInventoryItemEvent>
         if (@event.key == Keyboard.Key.Tab)
         {
             ActivePanel.OutlineThickness = 0f;
-            ActiveItem.TurnActive(false);
+            ActiveItem?.TurnActive(false);
 
             if (Backpack == ActivePanel)
             {
                 ActivePanel = EquipedItems;
                 ActiveItem = EquipedItems.Pointer;
+
             }
             else
             {
@@ -74,7 +74,8 @@ class InventoryPanel : Panel, IEventHandler<ChangeActiveInventoryItemEvent>
                 ActiveItem = Backpack.Pointer;
             }
 
-            ActivePanel.OutlineColor = Color.White;
+            ActiveItem?.TurnActive(true);
+
             ActivePanel.OutlineThickness = 4f;
         }
         else if (@event.key == Keyboard.Key.Enter)
@@ -118,13 +119,13 @@ class InventoryPanel : Panel, IEventHandler<ChangeActiveInventoryItemEvent>
         {
             ActiveItem?.TurnActive(false);
             ActiveItem = Backpack.Pointer;
-            ActiveItem.TurnActive(true);
+            ActiveItem?.TurnActive(true);
         }
         else
         {
             ActiveItem?.TurnActive(false);
             ActiveItem = EquipedItems.Pointer;
-            ActiveItem.TurnActive(true);
+            ActiveItem?.TurnActive(true);
         }
     }
 }

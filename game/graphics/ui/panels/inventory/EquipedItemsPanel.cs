@@ -33,6 +33,7 @@ class EquipedItemsPanel : Panel
         _parent = handler;
 
         FillColor = Palette.Instance.C07_PaleGreen;
+        OutlineColor = Color.White;
 
         Equiped = GetBlocks(inventory);
         Pointer = null;
