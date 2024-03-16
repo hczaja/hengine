@@ -4,13 +4,13 @@ using SFML.System;
 
 namespace game.graphics.ui.custom;
 
-class ItemBlock : IDrawable
+class InventoryItemBlock : IDrawable
 {
     public Vector2f Postion { get; }
     public Vector2f Size { get; }
     private RectangleShape Icon { get; set; }
 
-    public ItemBlock(Vector2f size, Vector2f position, Texture icon)
+    public InventoryItemBlock(Vector2f size, Vector2f position, Texture icon)
     {
         Size = size;
         Postion = position;

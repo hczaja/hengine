@@ -23,8 +23,8 @@ class EquipedItemsPanel : Panel
     private readonly IInventory _inventory;
     private readonly IEventHandler<ChangeActiveInventoryItemEvent> _parent;
 
-    private IEnumerable<ItemBlock> Equiped { get; }
-    public ItemBlock Pointer { get; private set; }
+    private IEnumerable<InventoryItemBlock> Equiped { get; }
+    public InventoryItemBlock Pointer { get; private set; }
 
     public EquipedItemsPanel(IInventory inventory, IEventHandler<ChangeActiveInventoryItemEvent> handler)
         : base(GetInitialPosition(), GetInitialSize())
@@ -39,13 +39,13 @@ class EquipedItemsPanel : Panel
         Pointer = null;
     }
 
-    private IEnumerable<ItemBlock> GetBlocks(IInventory inventory)
+    private IEnumerable<InventoryItemBlock> GetBlocks(IInventory inventory)
     {
-        var result = new List<ItemBlock>();
+        var result = new List<InventoryItemBlock>();
 
         if (inventory.Armour is not null)
         {
-            var armourBlock = new ItemBlock(
+            var armourBlock = new InventoryItemBlock(
                 new Vector2f(BackpackPanel._itemBlockWidth, BackpackPanel._itemBlockHeight),
                 Position,
                 TextureStorage.Instance.NoItemTexture.Value);
@@ -55,7 +55,7 @@ class EquipedItemsPanel : Panel
 
         if (inventory.Weapon is not null)
         {
-            var weaponBlock = new ItemBlock(
+            var weaponBlock = new InventoryItemBlock(
                 new Vector2f(BackpackPanel._itemBlockWidth, BackpackPanel._itemBlockHeight),
                 Position + new Vector2f(0f, BackpackPanel._itemBlockHeight),
                 TextureStorage.Instance.NoItemTexture.Value);
@@ -65,7 +65,7 @@ class EquipedItemsPanel : Panel
 
         if (inventory.Boots is not null)
         {
-            var bootsBlock = new ItemBlock(
+            var bootsBlock = new InventoryItemBlock(
                 new Vector2f(BackpackPanel._itemBlockWidth, BackpackPanel._itemBlockHeight),
                 Position + new Vector2f(0f, 2 * BackpackPanel._itemBlockHeight),
                 TextureStorage.Instance.NoItemTexture.Value);
@@ -96,7 +96,7 @@ class EquipedItemsPanel : Panel
             return;
         }
 
-        if (@event.key == Keyboard.Key.Up)
+        if (@event.Key == Keyboard.Key.Up)
         {
             if (Pointer is null)
             {
@@ -111,7 +111,7 @@ class EquipedItemsPanel : Panel
                     Pointer = prev;
             }
         }
-        else if (@event.key == Keyboard.Key.Down)
+        else if (@event.Key == Keyboard.Key.Down)
         {
             if (Pointer is null)
             {

@@ -30,8 +30,8 @@ class BackpackPanel : Panel
     private readonly IInventory _inventory;
     private readonly IEventHandler<ChangeActiveInventoryItemEvent> _parent;
     
-    private IEnumerable<ItemBlock> Backpack { get; }
-    public ItemBlock Pointer { get; private set; }
+    private IEnumerable<InventoryItemBlock> Backpack { get; }
+    public InventoryItemBlock Pointer { get; private set; }
 
     public BackpackPanel(IInventory inventory, IEventHandler<ChangeActiveInventoryItemEvent> handler)
         : base(GetInitialPosition(), GetInitialSize())
@@ -46,14 +46,14 @@ class BackpackPanel : Panel
         Pointer = null;
     }
 
-    private IEnumerable<ItemBlock> GetBlocks(IEnumerable<Item> backpack)
+    private IEnumerable<InventoryItemBlock> GetBlocks(IEnumerable<Item> backpack)
     {
-        var result = new List<ItemBlock>();
+        var result = new List<InventoryItemBlock>();
 
         int column = 0, row = 0;
         foreach (var item in backpack) 
         {
-            result.Add(new ItemBlock(
+            result.Add(new InventoryItemBlock(
                 new Vector2f(_itemBlockWidth, _itemBlockHeight),
                 Position + new Vector2f(column * _itemBlockWidth, row * _itemBlockHeight),
                 item.Texture));
@@ -94,7 +94,7 @@ class BackpackPanel : Panel
             return;
         }
 
-        if (@event.key == Keyboard.Key.Left)
+        if (@event.Key == Keyboard.Key.Left)
         {
             if (Pointer is null)
             {
@@ -109,7 +109,7 @@ class BackpackPanel : Panel
                     Pointer = prev;
             }
         }
-        else if (@event.key == Keyboard.Key.Right)
+        else if (@event.Key == Keyboard.Key.Right)
         {
             if (Pointer is null)
             {

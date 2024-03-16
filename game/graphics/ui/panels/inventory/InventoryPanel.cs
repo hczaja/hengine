@@ -22,7 +22,7 @@ class InventoryPanel : Panel, IEventHandler<ChangeActiveInventoryItemEvent>
     private readonly IInventory _inventory;
 
     Panel ActivePanel { get; set; }
-    ItemBlock ActiveItem { get; set; }
+    InventoryItemBlock ActiveItem { get; set; }
 
     private BackpackPanel Backpack { get; }
     private EquipedItemsPanel EquipedItems { get; }
@@ -38,7 +38,6 @@ class InventoryPanel : Panel, IEventHandler<ChangeActiveInventoryItemEvent>
         FillColor = Color.Black;
 
         ActivePanel = EquipedItems;
-
         ActivePanel.OutlineThickness = 4f;
 
         ActiveItem = EquipedItems.Pointer;
@@ -57,7 +56,7 @@ class InventoryPanel : Panel, IEventHandler<ChangeActiveInventoryItemEvent>
         if (@event.Type == KeyboardEventType.Released)
             return;
 
-        if (@event.key == Keyboard.Key.Tab)
+        if (@event.Key == Keyboard.Key.Tab)
         {
             ActivePanel.OutlineThickness = 0f;
             ActiveItem?.TurnActive(false);
@@ -78,7 +77,7 @@ class InventoryPanel : Panel, IEventHandler<ChangeActiveInventoryItemEvent>
 
             ActivePanel.OutlineThickness = 4f;
         }
-        else if (@event.key == Keyboard.Key.Enter)
+        else if (@event.Key == Keyboard.Key.Enter)
         {
             
         }

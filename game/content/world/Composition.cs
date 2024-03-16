@@ -9,6 +9,7 @@ using game.context;
 using game_engine.logger;
 using game.character;
 using game.graphics.ui.panels.inventory;
+using game.graphics.ui.panels.diary;
 
 namespace game.content.world;
 
@@ -63,7 +64,7 @@ internal class Composition :
 
         if (context is DiaryContext && current is not DiaryPanel)
         {
-            Panels.Push(new DiaryPanel());
+            Panels.Push(new DiaryPanel(_character.Diary));
             return;
         }
 

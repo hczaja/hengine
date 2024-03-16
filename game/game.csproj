@@ -15,6 +15,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="graphics\ui\panels\locations\" />
+  </ItemGroup>
  
   <PropertyGroup>
     <OutputType>Exe</OutputType>
