@@ -1,6 +1,7 @@
 ﻿using game.assets;
 using game.character.diary;
 using game.events;
+using game.graphics.ui.custom;
 using game.graphics.ui.panels.inventory;
 using game_engine.events;
 using game_engine.events.input;
@@ -12,7 +13,7 @@ using SFML.Window;
 
 namespace game.graphics.ui.panels.diary;
 
-class QuestDescriptionPanel : Panel
+class QuestDescriptionPanel : Panel, IEventHandler<SelectedQuestChangedEvent>
 {
     private static readonly float _panelWidthRatio = 0.54f;
     private static readonly float _panelWidth = InventoryPanel.GetInitialSize().X * _panelWidthRatio;
@@ -20,17 +21,13 @@ class QuestDescriptionPanel : Panel
     private static readonly float _panelHeightRatio = 0.96f;
     private static readonly float _panelHeight = InventoryPanel.GetInitialSize().Y * _panelHeightRatio;
 
+    private QuestDescriptionItemBlock DescriptionBlock { get; set; }
 
-    private readonly IDiary _diary;
-    private readonly IEventHandler<ChangeTabDiaryEvent> _parent;
-
-    public QuestDescriptionPanel(IDiary diary, IEventHandler<ChangeTabDiaryEvent> handler)
+    public QuestDescriptionPanel()
         : base(GetInitialPosition(), GetInitialSize())
-    {
-        _diary = diary;
-        _parent = handler;
-
+    {        
         FillColor = Palette.Instance.C03_Brown;
+        DescriptionBlock = new QuestDescriptionItemBlock();
     }
 
     internal static Vector2f GetInitialPosition()
@@ -50,16 +47,14 @@ class QuestDescriptionPanel : Panel
     internal static Vector2f GetInitialSize()
         => new Vector2f(_panelWidth, _panelHeight);
 
-    public override void Handle(KeyboardEvent @event)
-    {
-        if (@event.Key == Keyboard.Key.Tab)
-        {
-            
-        }
-    }
-
     public override void Draw(RenderTarget render)
     {
         render.Draw(this);
+        DescriptionBlock.Draw(render);
+    }
+
+    public void Handle(SelectedQuestChangedEvent @event)
+    {
+        DescriptionBlock.Handle(@event);
     }
 }

@@ -10,7 +10,7 @@ using SFML.Window;
 
 namespace game.graphics.ui.panels.diary;
 
-class DiaryPanel : Panel, IEventHandler<ChangeTabDiaryEvent>
+class DiaryPanel : Panel
 {
     private static readonly float _panelWidthRatio = 0.74f;
     private static readonly float _panelWidth = HEngineSettings.Instance.WindowWidth * _panelWidthRatio;
@@ -28,8 +28,8 @@ class DiaryPanel : Panel, IEventHandler<ChangeTabDiaryEvent>
     {
         _diary = diary;
 
-        QuestDescription = new QuestDescriptionPanel(diary, this);
-        QuestList = new QuestListPanel(diary, this);
+        QuestDescription = new QuestDescriptionPanel();
+        QuestList = new QuestListPanel(diary, QuestDescription);
 
         FillColor = Color.Black;
     }
@@ -47,18 +47,14 @@ class DiaryPanel : Panel, IEventHandler<ChangeTabDiaryEvent>
         if (@event.Type == KeyboardEventType.Released)
             return;
 
-        QuestDescription.Handle(@event); 
         QuestList.Handle(@event);
     }
 
     public override void Draw(RenderTarget render)
     {
         render.Draw(this);
-        QuestDescription.Draw(render);
-    }
 
-    public void Handle(ChangeTabDiaryEvent @event)
-    {
-        //Description.Handle(@event);
+        QuestList.Draw(render);
+        QuestDescription.Draw(render);
     }
 }
