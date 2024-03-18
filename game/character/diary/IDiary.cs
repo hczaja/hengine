@@ -20,3 +20,16 @@ interface IQuest
     IEnumerable<string> Logs { get; }
     IEnumerable<Func<bool>> Conditions { get; }
 }
+
+class Quest : IQuest
+{
+    public string Title => "test";
+
+    public string Description => "description lorem ipsum";
+
+    public string Author => "jon snow";
+
+    public IEnumerable<string> Logs => new List<string>();
+
+    public IEnumerable<Func<bool>> Conditions => new List<Func<bool>>();
+}

@@ -12,7 +12,6 @@ class QuestListBlock : IDrawable
 {
     private Vector2f Postion { get; }
     private Vector2f Size { get; }
-    private RectangleShape Shape { get; }
     private List<QuestListItemBlock> QuestsBlocks { get; set; }
     private bool ShowActiveQuests { get; }
 
@@ -34,15 +33,14 @@ class QuestListBlock : IDrawable
                 2 * HEngineSettings.Instance.SmallOffsetX,
                 2 * HEngineSettings.Instance.SmallOffsetY);
 
-        Shape = new RectangleShape(Size);
-        Shape.Position = Postion;
-        Shape.FillColor = Color.White;
-
         QuestsBlocks = new List<QuestListItemBlock>();
+
+        int index = 0;
         foreach (var quest in diary.Active)
         {
             QuestsBlocks.Add(
-                new QuestListItemBlock(quest));
+                new QuestListItemBlock(quest, index));
+            index++;
         }
         ShowActiveQuests = true;
 
@@ -55,7 +53,6 @@ class QuestListBlock : IDrawable
 
     public void Draw(RenderTarget render)
     {
-        render.Draw(Shape);
         foreach (var item in QuestsBlocks)
             item.Draw(render);
     }
@@ -64,12 +61,14 @@ class QuestListBlock : IDrawable
     {
         QuestsBlocks = new List<QuestListItemBlock>();
 
+        int index = 0;
         foreach (var quest in ShowActiveQuests 
             ? _diary.Active 
             : _diary.Finished)
         {
             QuestsBlocks.Add(
-                new QuestListItemBlock(quest));
+                new QuestListItemBlock(quest, index));
+            index++;
         }
     }
 }
