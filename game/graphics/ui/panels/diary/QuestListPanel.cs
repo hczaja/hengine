@@ -23,6 +23,8 @@ internal class QuestListPanel : Panel
     private static readonly float _panelHeight = InventoryPanel.GetInitialSize().Y * _panelHeightRatio;
 
     private QuestListBlock QuestListBlock { get; set; }
+    private QuestListTab Active { get; }
+    private QuestListTab Finished { get; }
 
     private readonly IDiary _diary;
     private readonly IEventHandler<SelectedQuestChangedEvent> _handler;
@@ -34,6 +36,10 @@ internal class QuestListPanel : Panel
         _handler = handler;
 
         FillColor = Palette.Instance.C03_Brown;
+
+        Active = new QuestListTab(0);
+        Finished = new QuestListTab(1);
+        
         QuestListBlock = new QuestListBlock(diary);
     }
 
@@ -53,6 +59,8 @@ internal class QuestListPanel : Panel
     {
         render.Draw(this);
         QuestListBlock.Draw(render);
+        Active.Draw(render);
+        Finished.Draw(render);
     }
 
     public override void Handle(KeyboardEvent @event)
