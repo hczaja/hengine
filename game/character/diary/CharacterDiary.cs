@@ -9,6 +9,13 @@ class CharacterDiary : IDiary
 
         (Active as List<IQuest>).Add(new Quest());
         (Active as List<IQuest>).Add(new Quest());
+
+        (Finished as List<IQuest>).Add(new Quest());
+        (Finished as List<IQuest>).Add(new Quest());
+        (Finished as List<IQuest>).Add(new Quest());
+        (Finished as List<IQuest>).Add(new Quest());
+        (Finished as List<IQuest>).Add(new Quest());
+        (Finished as List<IQuest>).Add(new Quest());
     }
 
     public IEnumerable<IQuest> Finished { get; } 

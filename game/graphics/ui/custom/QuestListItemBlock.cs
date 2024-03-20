@@ -13,10 +13,14 @@ class QuestListItemBlock : IDrawable
 {
     private RectangleShape Shape { get; }
     private Text Text { get; }
+    public IQuest Quest { get; }
+    public int Index { get; }
+    public bool Enabled { get; private set; }
 
     public QuestListItemBlock(IQuest quest, int index)
     {
         Quest = quest;
+        Index = index;
 
         var parentSize = QuestListPanel.GetInitialSize();
         var size = new Vector2f(parentSize.X, HEngineSettings.Instance.SmallOffsetY);
@@ -26,21 +30,34 @@ class QuestListItemBlock : IDrawable
         Shape = new RectangleShape(size);
         Shape.OutlineThickness = 2f;
         Shape.OutlineColor = Color.Black;
+        Shape.FillColor = Palette.Instance.C03_Brown;
         
         Shape.Position = parentPosition + new Vector2f(0f, index * size.Y);
 
-        var fontSize = RetroGamingFont.Instance.GetConsoleFontSize();
+        Text = new Text(
+            quest.Title, 
+            RetroGamingFont.Instance.Font, 
+            RetroGamingFont.Instance.GetConsoleFontSize());
 
-        Text = new Text(quest.Title, RetroGamingFont.Instance.Font, fontSize);
         Text.FillColor = Color.Black;
         Text.Position = Shape.Position;
     }
-
-    public IQuest Quest { get; }
 
     public void Draw(RenderTarget render)
     {
         render.Draw(Shape);
         render.Draw(Text);
+    }
+
+    public void Enable()
+    {
+        Enabled = true;
+        Shape.FillColor = Color.White;
+    }
+
+    public void Disable()
+    {
+        Enabled = false;
+        Shape.FillColor = Palette.Instance.C03_Brown;
     }
 }

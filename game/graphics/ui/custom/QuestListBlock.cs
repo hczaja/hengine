@@ -13,11 +13,10 @@ class QuestListBlock : IDrawable
     private Vector2f Postion { get; }
     private Vector2f Size { get; }
     private List<QuestListItemBlock> QuestsBlocks { get; set; }
-    private bool ShowActiveQuests { get; }
+    private bool ShowActiveQuests { get; set; }
+    private QuestListItemBlock Pointer { get; set; }
 
     private readonly IDiary _diary;
-
-    public IQuest Pointer { get; }
 
     public QuestListBlock(IDiary diary)
     {
@@ -42,14 +41,17 @@ class QuestListBlock : IDrawable
                 new QuestListItemBlock(quest, index));
             index++;
         }
-        ShowActiveQuests = true;
 
-        Pointer = null;
+        ShowActiveQuests = true;
 
         var first = QuestsBlocks.FirstOrDefault();
         if (first is not null)
-            Pointer = first.Quest;
+            Pointer = first;
+
+        Pointer?.Enable();
     }
+
+    public IQuest GetQuest() => Pointer?.Quest;
 
     public void Draw(RenderTarget render)
     {
@@ -57,8 +59,9 @@ class QuestListBlock : IDrawable
             item.Draw(render);
     }
 
-    public void SwitchList()
+    public void SwitchTab()
     {
+        ShowActiveQuests = !ShowActiveQuests;
         QuestsBlocks = new List<QuestListItemBlock>();
 
         int index = 0;
@@ -70,5 +73,59 @@ class QuestListBlock : IDrawable
                 new QuestListItemBlock(quest, index));
             index++;
         }
+
+        var first = QuestsBlocks.FirstOrDefault();
+        if (first is not null)
+        { 
+            Pointer = first;
+        }
+
+        Pointer?.Enable();
+    }
+
+    public void Next()
+    {
+        Pointer?.Disable();
+
+        if (Pointer is null)
+        {
+            Pointer = QuestsBlocks.FirstOrDefault();
+            Pointer?.Enable();
+            return;
+        }
+
+        var index = QuestsBlocks.IndexOf(Pointer);
+        if (index + 1 >= QuestsBlocks.Count)
+        {
+            Pointer = QuestsBlocks.FirstOrDefault();
+            Pointer?.Enable();
+            return;
+        }
+
+        Pointer = QuestsBlocks[index + 1];
+        Pointer?.Enable();
+    }
+
+    public void Prev()
+    {
+        Pointer?.Disable();
+
+        if (Pointer is null)
+        {
+            Pointer = QuestsBlocks.FirstOrDefault();
+            Pointer?.Enable();
+            return;
+        }
+
+        var index = QuestsBlocks.IndexOf(Pointer);
+        if (index - 1 < 0)
+        {
+            Pointer = QuestsBlocks.LastOrDefault();
+            Pointer?.Enable();
+            return;
+        }
+
+        Pointer = QuestsBlocks[index - 1];
+        Pointer?.Enable();
     }
 }

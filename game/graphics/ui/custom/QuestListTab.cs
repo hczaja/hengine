@@ -11,6 +11,8 @@ class QuestListTab : IDrawable
 {
     private RectangleShape Shape { get; }
 
+    public bool Enabled { get; private set; }
+
     public QuestListTab(int index)
     {
         var parentPos = QuestListPanel.GetInitialPosition();
@@ -20,13 +22,22 @@ class QuestListTab : IDrawable
 
         Shape = new RectangleShape(size);
         Shape.Position = parentPos + new Vector2f(index * size.X, 0f);
-        Shape.OutlineThickness = 2f;
-        Shape.OutlineColor = Color.Black;
-        Shape.FillColor = Palette.Instance.C09_PaleYellow;
     }
 
     public void Draw(RenderTarget render)
     {
         render.Draw(Shape);
+    }
+
+    public void Enable()
+    {
+        Enabled = true;
+        Shape.FillColor = Color.White;
+    }
+
+    public void Disable()
+    {
+        Enabled = false;
+        Shape.FillColor = Palette.Instance.C03_Brown;
     }
 }

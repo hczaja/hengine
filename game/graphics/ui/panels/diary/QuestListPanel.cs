@@ -23,8 +23,8 @@ internal class QuestListPanel : Panel
     private static readonly float _panelHeight = InventoryPanel.GetInitialSize().Y * _panelHeightRatio;
 
     private QuestListBlock QuestListBlock { get; set; }
-    private QuestListTab Active { get; }
-    private QuestListTab Finished { get; }
+    private QuestListTab ActiveTab { get; }
+    private QuestListTab FinishedTab { get; }
 
     private readonly IDiary _diary;
     private readonly IEventHandler<SelectedQuestChangedEvent> _handler;
@@ -37,9 +37,12 @@ internal class QuestListPanel : Panel
 
         FillColor = Palette.Instance.C03_Brown;
 
-        Active = new QuestListTab(0);
-        Finished = new QuestListTab(1);
-        
+        ActiveTab = new QuestListTab(0);
+        ActiveTab.Enable();
+
+        FinishedTab = new QuestListTab(1);
+        FinishedTab.Disable();
+
         QuestListBlock = new QuestListBlock(diary);
     }
 
@@ -58,17 +61,39 @@ internal class QuestListPanel : Panel
     public override void Draw(RenderTarget render)
     {
         render.Draw(this);
+
         QuestListBlock.Draw(render);
-        Active.Draw(render);
-        Finished.Draw(render);
+        ActiveTab.Draw(render);
+        FinishedTab.Draw(render);
     }
 
     public override void Handle(KeyboardEvent @event)
     {
         if (@event.Key == Keyboard.Key.Tab)
         {
-            QuestListBlock.SwitchList();
-            _handler.Handle(new SelectedQuestChangedEvent(QuestListBlock.Pointer));
+            if (ActiveTab.Enabled)
+            {
+                ActiveTab.Disable();
+                FinishedTab.Enable();
+            }
+            else
+            {
+                FinishedTab.Disable();
+                ActiveTab.Enable();
+            }
+
+            QuestListBlock.SwitchTab();
+            _handler.Handle(new SelectedQuestChangedEvent(QuestListBlock.GetQuest()));
+        }
+        else if (@event.Key == Keyboard.Key.Up)
+        {
+            QuestListBlock.Prev();
+            _handler.Handle(new SelectedQuestChangedEvent(QuestListBlock.GetQuest()));
+        }
+        else if (@event.Key == Keyboard.Key.Down)
+        {
+            QuestListBlock.Next();
+            _handler.Handle(new SelectedQuestChangedEvent(QuestListBlock.GetQuest()));
         }
     }
 }
