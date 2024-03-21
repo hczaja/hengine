@@ -23,8 +23,8 @@ internal class QuestListPanel : Panel
     private static readonly float _panelHeight = InventoryPanel.GetInitialSize().Y * _panelHeightRatio;
 
     private QuestListBlock QuestListBlock { get; set; }
-    private QuestListTab ActiveTab { get; }
-    private QuestListTab FinishedTab { get; }
+    private QuestListTab ActiveQuestsTab { get; }
+    private QuestListTab FinishedQuestsTab { get; }
 
     private readonly IDiary _diary;
     private readonly IEventHandler<SelectedQuestChangedEvent> _handler;
@@ -37,13 +37,14 @@ internal class QuestListPanel : Panel
 
         FillColor = Palette.Instance.C03_Brown;
 
-        ActiveTab = new QuestListTab(0);
-        ActiveTab.Enable();
+        ActiveQuestsTab = new QuestListTab(0);
+        ActiveQuestsTab.Enable();
 
-        FinishedTab = new QuestListTab(1);
-        FinishedTab.Disable();
+        FinishedQuestsTab = new QuestListTab(1);
+        FinishedQuestsTab.Disable();
 
         QuestListBlock = new QuestListBlock(diary);
+        _handler.Handle(new SelectedQuestChangedEvent(QuestListBlock.GetQuest()));
     }
 
     internal static Vector2f GetInitialPosition()
@@ -63,23 +64,23 @@ internal class QuestListPanel : Panel
         render.Draw(this);
 
         QuestListBlock.Draw(render);
-        ActiveTab.Draw(render);
-        FinishedTab.Draw(render);
+        ActiveQuestsTab.Draw(render);
+        FinishedQuestsTab.Draw(render);
     }
 
     public override void Handle(KeyboardEvent @event)
     {
         if (@event.Key == Keyboard.Key.Tab)
         {
-            if (ActiveTab.Enabled)
+            if (ActiveQuestsTab.Enabled)
             {
-                ActiveTab.Disable();
-                FinishedTab.Enable();
+                ActiveQuestsTab.Disable();
+                FinishedQuestsTab.Enable();
             }
             else
             {
-                FinishedTab.Disable();
-                ActiveTab.Enable();
+                FinishedQuestsTab.Disable();
+                ActiveQuestsTab.Enable();
             }
 
             QuestListBlock.SwitchTab();

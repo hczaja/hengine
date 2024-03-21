@@ -62,6 +62,7 @@ internal class Composition :
         var context = @event.Context;
         Panels.TryPop(out Panel current);
 
+        // create panels only once 
         if (context is DiaryContext && current is not DiaryPanel)
         {
             Panels.Push(new DiaryPanel(_character.Diary));

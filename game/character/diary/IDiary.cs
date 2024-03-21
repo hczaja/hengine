@@ -23,11 +23,14 @@ interface IQuest
 
 class Quest : IQuest
 {
-    public string Title => "test";
+    public Quest(string title, string description, string author)
+        => (Title, Description, Author) = (title, description, author);
 
-    public string Description => "description lorem ipsum";
+    public string Title { get; }
 
-    public string Author => "jon snow";
+    public string Description { get; }
+
+    public string Author { get; }
 
     public IEnumerable<string> Logs => new List<string>();
 

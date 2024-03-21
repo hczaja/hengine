@@ -10,8 +10,6 @@ namespace game.graphics.ui.custom;
 
 class QuestListBlock : IDrawable
 {
-    private Vector2f Postion { get; }
-    private Vector2f Size { get; }
     private List<QuestListItemBlock> QuestsBlocks { get; set; }
     private bool ShowActiveQuests { get; set; }
     private QuestListItemBlock Pointer { get; set; }
@@ -21,16 +19,6 @@ class QuestListBlock : IDrawable
     public QuestListBlock(IDiary diary)
     {
         _diary = diary;
-
-        Postion = QuestListPanel.GetInitialPosition() 
-            + new Vector2f(
-                HEngineSettings.Instance.SmallOffsetX,
-                HEngineSettings.Instance.SmallOffsetY);
-
-        Size = QuestListPanel.GetInitialSize()
-            - new Vector2f(
-                2 * HEngineSettings.Instance.SmallOffsetX,
-                2 * HEngineSettings.Instance.SmallOffsetY);
 
         QuestsBlocks = new List<QuestListItemBlock>();
 
