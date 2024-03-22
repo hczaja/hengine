@@ -12,11 +12,8 @@ namespace game.graphics.ui.custom;
 class QuestDescriptionItemBlock : IDrawable, IEventHandler<SelectedQuestChangedEvent>
 {
     private Text Title { get; }
-
     private Text Author { get; }
-
     private Text Description { get; }
-
     private Text Logs { get; }
 
     public QuestDescriptionItemBlock()

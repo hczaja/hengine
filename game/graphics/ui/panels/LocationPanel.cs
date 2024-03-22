@@ -1,4 +1,5 @@
 ﻿using game_engine.graphics.ui;
+using game_engine.logger;
 using game_engine.settings;
 using SFML.Graphics;
 using SFML.System;
@@ -13,7 +14,7 @@ class LocationPanel : Panel
     private static readonly float _panelHeightRatio = 0.96f;
     private static readonly float _panelHeight = HEngineSettings.Instance.WindowHeight * _panelHeightRatio;
 
-    public LocationPanel()
+    public LocationPanel(ILogger logger)
         : base(GetInitialPosition(), GetInitialSize())
     {
 

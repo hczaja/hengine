@@ -30,8 +30,11 @@ internal class Composition :
         _logger = logger;
         _character = mainCharacter;
 
-        Panels = new Stack<Panel>(); 
-        Panels.Push(new LocationPanel());
+        Panels = new Stack<Panel>();
+
+        Panels.Push(new InventoryPanel(_logger, _character.Inventory));
+        Panels.Push(new DiaryPanel(_logger, _character.Diary));
+        Panels.Push(new LocationPanel(_logger));
     }
 
     public void Draw(RenderTarget render)
@@ -60,27 +63,31 @@ internal class Composition :
             return;
 
         var context = @event.Context;
-        Panels.TryPop(out Panel current);
 
-        // create panels only once 
-        if (context is DiaryContext && current is not DiaryPanel)
+        if (context is DiaryContext)
+            MoveOnTop<DiaryPanel>();
+
+        if (context is InventoryContext)
+            MoveOnTop<InventoryPanel>();
+
+        if (context is LocationContext)
+            MoveOnTop<LocationPanel>();
+    }
+
+    private void MoveOnTop<T>() where T : Panel
+    {
+        var tempPanels = new Stack<Panel>();
+        while (Top is not T)
         {
-            Panels.Push(new DiaryPanel(_character.Diary));
-            return;
+            tempPanels.Push(Panels.Pop());
         }
 
-        if (context is InventoryContext && current is not InventoryPanel)
+        var panel = Panels.Pop();
+        while (tempPanels.Count > 0)
         {
-            Panels.Push(new InventoryPanel(_character.Inventory));
-            return;
+            Panels.Push(tempPanels.Pop());
         }
 
-        if (context is LocationContext && current is not LocationPanel)
-        {
-            Panels.Push(new LocationPanel());
-            return;
-        }
-
-        Panels.Push(current);
+        Panels.Push(panel);
     }
 }

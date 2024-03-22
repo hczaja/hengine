@@ -3,6 +3,7 @@ using game.graphics.ui.custom;
 using game_engine.events;
 using game_engine.events.input;
 using game_engine.graphics.ui;
+using game_engine.logger;
 using game_engine.settings;
 using SFML.Graphics;
 using SFML.System;
@@ -27,7 +28,7 @@ class InventoryPanel : Panel, IEventHandler<ChangeActiveInventoryItemEvent>
     private BackpackPanel Backpack { get; }
     private EquipedItemsPanel EquipedItems { get; }
 
-    public InventoryPanel(IInventory inventory)
+    public InventoryPanel(ILogger logger, IInventory inventory)
         : base(GetInitialPosition(), GetInitialSize())
     {
         _inventory = inventory;

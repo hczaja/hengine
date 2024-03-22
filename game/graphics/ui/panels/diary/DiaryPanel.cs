@@ -3,6 +3,7 @@ using game.events;
 using game_engine.events;
 using game_engine.events.input;
 using game_engine.graphics.ui;
+using game_engine.logger;
 using game_engine.settings;
 using SFML.Graphics;
 using SFML.System;
@@ -23,7 +24,7 @@ class DiaryPanel : Panel
     private QuestDescriptionPanel QuestDescription { get; }
     private QuestListPanel QuestList { get; }
 
-    public DiaryPanel(IDiary diary)
+    public DiaryPanel(ILogger logger, IDiary diary)
         : base(GetInitialPosition(), GetInitialSize())
     {
         _diary = diary;
