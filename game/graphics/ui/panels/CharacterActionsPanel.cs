@@ -1,5 +1,6 @@
 ﻿using game.assets;
 using game.context;
+using game.logger;
 using game_engine.content;
 using game_engine.context;
 using game_engine.events.input;
@@ -93,7 +94,7 @@ class CharacterActionsPanel : Panel
         new Texture("assets/textures/buttons/campfire.png"),
         callback: () => {
             _main.Handle(new ChangeContextEvent(new LocationContext()));
-            _logger.Log("Location..");
+            _logger.Log(new Message("Location.."));
         });
 
     private Button GetInventoryButton(int col, int row) => new Button(
@@ -102,7 +103,7 @@ class CharacterActionsPanel : Panel
         new Texture("assets/textures/buttons/campfire.png"),
         callback: () => {
             _main.Handle(new ChangeContextEvent(new InventoryContext()));
-            _logger.Log("InventoryInventoryInventoryInventoryInventoryInventoryInventory");
+            _logger.Log(new Message("InventoryInventoryInventoryInventoryInventoryInventoryInventory"));
         });
 
     private Button GetDiaryButton(int col, int row) => new Button(

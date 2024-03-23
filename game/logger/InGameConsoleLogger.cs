@@ -21,9 +21,9 @@ namespace game.logger
         private readonly int _logsLimit = 5000;
         private readonly int _logsToRemove = 2000;
 
-        public void Log(string message)
+        public void Log(IMessage message)
         {
-            var parts = SplitMessage(message);
+            var parts = SplitMessage(message.Content);
             buffer.AppendLine($"> {parts.First()}");
 
             foreach (var line in parts.Skip(1))
