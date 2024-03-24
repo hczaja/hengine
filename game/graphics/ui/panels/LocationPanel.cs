@@ -1,4 +1,5 @@
-﻿using game_engine.graphics.ui;
+﻿using game.locations;
+using game_engine.graphics.ui;
 using game_engine.logger;
 using game_engine.settings;
 using SFML.Graphics;
@@ -14,10 +15,14 @@ class LocationPanel : Panel
     private static readonly float _panelHeightRatio = 0.96f;
     private static readonly float _panelHeight = HEngineSettings.Instance.WindowHeight * _panelHeightRatio;
 
-    public LocationPanel(ILogger logger)
+    private readonly LocationManager _locationManager;
+    private ILocation Location { get; set; }
+
+    public LocationPanel(ILogger logger, LocationManager locationManager)
         : base(GetInitialPosition(), GetInitialSize())
     {
-
+        _locationManager = locationManager;
+        Location = locationManager.GetStartingLocation(GetInitialPosition());
     }
 
     internal static Vector2f GetInitialPosition()
@@ -31,5 +36,6 @@ class LocationPanel : Panel
     public override void Draw(RenderTarget render)
     {
         render.Draw(this);
+        Location.Draw(render);
     }
 }

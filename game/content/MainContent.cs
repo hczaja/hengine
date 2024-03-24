@@ -1,5 +1,6 @@
 ﻿using game.character;
 using game.content.world;
+using game.locations;
 using game_engine.content;
 using game_engine.events.input;
 using game_engine.events.system;
@@ -18,9 +19,10 @@ class MainContent : IContent
     public MainContent(ILogger logger)
     {
         var mainCharacter = new MainCharacter();
+        var locationManager = new LocationManager();
 
         UI = new UserInterface(this, logger, mainCharacter);
-        Composition = new Composition(logger, mainCharacter);
+        Composition = new Composition(logger, mainCharacter, locationManager);
     }
 
     public void Draw(RenderTarget render)

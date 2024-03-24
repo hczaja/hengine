@@ -10,6 +10,7 @@ using game_engine.logger;
 using game.character;
 using game.graphics.ui.panels.inventory;
 using game.graphics.ui.panels.diary;
+using game.locations;
 
 namespace game.content.world;
 
@@ -25,7 +26,7 @@ internal class Composition :
     private readonly ILogger _logger;
     private readonly ICharacter _character;
 
-    public Composition(ILogger logger, ICharacter mainCharacter)
+    public Composition(ILogger logger, ICharacter mainCharacter, LocationManager locationManager)
     {
         _logger = logger;
         _character = mainCharacter;
@@ -34,7 +35,7 @@ internal class Composition :
 
         Panels.Push(new InventoryPanel(_logger, _character.Inventory));
         Panels.Push(new DiaryPanel(_logger, _character.Diary));
-        Panels.Push(new LocationPanel(_logger));
+        Panels.Push(new LocationPanel(_logger, locationManager));
     }
 
     public void Draw(RenderTarget render)

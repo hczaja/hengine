@@ -14,10 +14,12 @@
     <None Update="assets\textures\avatars\*.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="assets\locations\*.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="graphics\ui\panels\locations\" />
     <Folder Include="dialogues\" />
   </ItemGroup>
  

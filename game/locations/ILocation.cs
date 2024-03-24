@@ -1,21 +1,10 @@
-﻿namespace game.locations;
+﻿using game_engine.graphics;
 
-interface ILocation
-{
-    string Id { get; set; }
-    IEnumerable<IRoute> Routes { get; }
-    IEnumerable<ILocationNode> Nodes { get; }
-}
+namespace game.locations;
 
-interface ILocationNode
+interface ILocation : IDrawable
 {
-    IEnumerable<IRoute> Routes { get; }
-}
-
-interface IRoute
-{
-    string OriginId { get; }
-    string DestinationId { get; }
-    float Distance { get; }
-    float Difficulty { get; }
+    string Id { get; }
+    IEnumerable<Route> ExternalRoutes { get; }
+    IEnumerable<LocationNode> Nodes { get; }
 }
