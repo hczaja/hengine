@@ -28,5 +28,10 @@ class TrintedRillRegion : ILocation
     public void Draw(RenderTarget render)
     {
         render.Draw(_background);
+
+        foreach (var node in Nodes)
+        {
+            node.Draw(render);
+        }
     }
 }
