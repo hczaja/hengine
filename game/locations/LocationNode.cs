@@ -1,19 +1,21 @@
 ﻿using game.assets;
 using game.graphics.ui.panels;
 using game_engine.events;
+using game_engine.events.input;
 using game_engine.graphics;
 using SFML.Graphics;
 using SFML.System;
 
 namespace game.locations;
 
-class LocationNode : IDrawable
+class LocationNode : IDrawable, IEventHandler<MouseEvent>
 {
     public string Name { get; }
     public float X { get; }
     public float Y { get; }
 
     CircleShape CircleShape { get; }
+    RectangleShape RectangleShape { get; }
 
     public LocationNode(string name, float x, float y)
     {
@@ -33,5 +35,13 @@ class LocationNode : IDrawable
     public void Draw(RenderTarget render)
     {
         render.Draw(CircleShape);
+    }
+
+    public void Handle(MouseEvent @event)
+    {
+        if (@event.Type != MouseEventType.Pressed)
+            return;
+
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using SFML.Graphics;
+﻿using game_engine.events.input;
+using SFML.Graphics;
 
 namespace game.locations.data.chapter_one;
 
@@ -18,6 +19,11 @@ class TrintedRill : ILocation
     }
 
     public void Draw(RenderTarget render)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Handle(MouseEvent @event)
     {
         throw new NotImplementedException();
     }

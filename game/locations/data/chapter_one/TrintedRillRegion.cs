@@ -1,4 +1,5 @@
-﻿using SFML.Graphics;
+﻿using game_engine.events.input;
+using SFML.Graphics;
 using SFML.System;
 
 namespace game.locations.data.chapter_one;
@@ -32,6 +33,14 @@ class TrintedRillRegion : ILocation
         foreach (var node in Nodes)
         {
             node.Draw(render);
+        }
+    }
+
+    public void Handle(MouseEvent @event)
+    {
+        foreach (var node in Nodes)
+        {
+            node.Handle(@event);
         }
     }
 }

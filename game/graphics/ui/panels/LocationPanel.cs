@@ -1,4 +1,5 @@
 ﻿using game.locations;
+using game_engine.events.input;
 using game_engine.graphics.ui;
 using game_engine.logger;
 using game_engine.settings;
@@ -16,13 +17,13 @@ class LocationPanel : Panel
     private static readonly float _panelHeight = HEngineSettings.Instance.WindowHeight * _panelHeightRatio;
 
     private readonly LocationManager _locationManager;
-    private ILocation Location { get; set; }
+    private ILocation CurrentLocation { get; set; }
 
     public LocationPanel(ILogger logger, LocationManager locationManager)
         : base(GetInitialPosition(), GetInitialSize())
     {
         _locationManager = locationManager;
-        Location = locationManager.GetStartingLocation(GetInitialPosition());
+        CurrentLocation = locationManager.GetStartingLocation(GetInitialPosition());
     }
 
     internal static Vector2f GetInitialPosition()
@@ -36,6 +37,11 @@ class LocationPanel : Panel
     public override void Draw(RenderTarget render)
     {
         render.Draw(this);
-        Location.Draw(render);
+        CurrentLocation.Draw(render);
+    }
+
+    public override void Handle(MouseEvent @event)
+    {
+        CurrentLocation.Handle(@event);
     }
 }
