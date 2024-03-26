@@ -3,6 +3,7 @@ using game.graphics.ui.panels;
 using game_engine.events;
 using game_engine.events.input;
 using game_engine.graphics;
+using game_engine.system;
 using SFML.Graphics;
 using SFML.System;
 
@@ -42,6 +43,10 @@ class LocationNode : IDrawable, IEventHandler<MouseEvent>
         if (@event.Type != MouseEventType.Pressed)
             return;
 
+        var center = CircleShape.Position;
+        if (!center.IsMouseEventRaisedInCircle(CircleShape.Radius, @event))
+            return;
 
+        Console.WriteLine("test");
     }
 }

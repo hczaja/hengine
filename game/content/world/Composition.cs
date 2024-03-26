@@ -50,7 +50,7 @@ internal class Composition :
 
     public void Handle(MouseEvent @event)
     {
-
+        Top.Handle(@event);
     }
 
     public void Handle(KeyboardEvent @event)

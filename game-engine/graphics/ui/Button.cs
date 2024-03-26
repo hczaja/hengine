@@ -24,7 +24,7 @@ public class Button :
 
     public void Handle(MouseEvent @event)
     {
-        if (Boundaries.IsMouseEventRaisedIn(@event) && @event.Type == MouseEventType.Pressed)
+        if (Boundaries.IsMouseEventRaisedInRectangle(@event) && @event.Type == MouseEventType.Pressed)
         {
             Callback();
         }
