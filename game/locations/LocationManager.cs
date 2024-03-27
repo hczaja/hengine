@@ -1,11 +1,12 @@
 ﻿using game.locations.data.chapter_one;
+using game_contracts.locations;
 using SFML.System;
 
 namespace game.locations;
 
-class LocationManager
+class LocationManager : ILocationManager
 {
-    IEnumerable<ILocation> Locations { get; }
+    public IEnumerable<ILocation> Locations { get; }
 
     public LocationManager()
     {

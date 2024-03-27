@@ -1,4 +1,6 @@
-﻿namespace game.locations;
+﻿using game_contracts.locations;
+
+namespace game.locations;
 
 class Route
 {

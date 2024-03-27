@@ -1,4 +1,6 @@
-﻿namespace game.character;
+﻿using game_contracts.character;
+
+namespace game.character;
 
 internal class CharacterStatistics : ICharacterStatistics
 {

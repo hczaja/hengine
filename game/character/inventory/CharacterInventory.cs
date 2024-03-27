@@ -1,4 +1,4 @@
-﻿using game.character.inventory.items;
+﻿using game_contracts.inventory;
 
 namespace game.character.inventory;
 

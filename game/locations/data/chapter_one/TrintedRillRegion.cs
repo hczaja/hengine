@@ -1,4 +1,5 @@
 ﻿using game.graphics.ui.locations;
+using game_contracts.locations;
 using game_engine.events.input;
 using SFML.Graphics;
 using SFML.System;

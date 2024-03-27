@@ -1,4 +1,6 @@
-﻿using game.content;
+﻿using game.character;
+using game.content;
+using game.locations;
 using game.logger;
 using game_engine.content;
 using game_engine.core;
@@ -21,7 +23,7 @@ internal class GameCore : IHEngineCore
 
     public GameCore()
     {
-        var main = new MainContent(new InGameConsoleLogger());
+        var main = new MainContent(new InGameConsoleLogger(), new MainCharacter(), new LocationManager());
         var common = new StaticContent();
 
         ContentRegistry = new Dictionary<string, IContent>()

@@ -1,4 +1,6 @@
-﻿namespace game.character.diary;
+﻿using game_contracts.diary;
+
+namespace game.character.diary;
 
 class CharacterDiary : IDiary
 {
