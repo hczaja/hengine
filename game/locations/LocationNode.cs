@@ -16,7 +16,6 @@ class LocationNode : IDrawable, IEventHandler<MouseEvent>
     public float Y { get; }
 
     CircleShape CircleShape { get; }
-    RectangleShape RectangleShape { get; }
 
     public LocationNode(string name, float x, float y)
     {
@@ -43,7 +42,7 @@ class LocationNode : IDrawable, IEventHandler<MouseEvent>
         if (@event.Type != MouseEventType.Pressed)
             return;
 
-        var center = CircleShape.Position;
+        var center = CircleShape.GetCenter();
         if (!center.IsMouseEventRaisedInCircle(CircleShape.Radius, @event))
             return;
 
