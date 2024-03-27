@@ -31,6 +31,8 @@ class RetroGamingFont
         return 24;
     }
 
+    public uint GetLocationNameFontSize() => 20;
+
     public int GetConsoleMaxLines() => 20;
 
     public uint GetConsoleMaxCharactersInLine() => 40;

@@ -1,4 +1,5 @@
-﻿using game_engine.events.input;
+﻿using game.graphics.ui.locations;
+using game_engine.events.input;
 using SFML.Graphics;
 
 namespace game.locations.data.chapter_one;
@@ -9,11 +10,11 @@ class TrintedRill : ILocation
 
     public IEnumerable<Route> ExternalRoutes => throw new NotImplementedException();
 
-    public IEnumerable<LocationNode> Nodes { get; }
+    public IEnumerable<DrawableLocationNode> Nodes { get; }
 
     public TrintedRill()
     {
-        Nodes = new List<LocationNode>()
+        Nodes = new List<DrawableLocationNode>()
         {
         };
     }

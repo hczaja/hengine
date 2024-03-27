@@ -1,4 +1,5 @@
-﻿using game_engine.events.input;
+﻿using game.graphics.ui.locations;
+using game_engine.events.input;
 using SFML.Graphics;
 using SFML.System;
 
@@ -12,7 +13,7 @@ class TrintedRillRegion : ILocation
 
     public IEnumerable<Route> ExternalRoutes { get; }
 
-    public IEnumerable<LocationNode> Nodes { get; }
+    public IEnumerable<DrawableLocationNode> Nodes { get; }
 
     public TrintedRillRegion(Vector2f position)
     {
@@ -20,9 +21,9 @@ class TrintedRillRegion : ILocation
         _background.Position = position;
         _background.Texture = new Texture("assets/locations/TrintedRillRegion.png");
 
-        Nodes = new List<LocationNode>()
+        Nodes = new List<DrawableLocationNode>()
         {
-            new LocationNode("Lumberjack House", 204, 672),
+            new DrawableLocationNode(new LocationNode("Lumberjack House", 204, 672)),
         };
     }
 

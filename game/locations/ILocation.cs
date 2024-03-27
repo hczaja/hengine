@@ -1,4 +1,5 @@
-﻿using game_engine.events;
+﻿using game.graphics.ui.locations;
+using game_engine.events;
 using game_engine.events.input;
 using game_engine.graphics;
 
@@ -8,5 +9,5 @@ interface ILocation : IDrawable, IEventHandler<MouseEvent>
 {
     string Id { get; }
     IEnumerable<Route> ExternalRoutes { get; }
-    IEnumerable<LocationNode> Nodes { get; }
+    IEnumerable<DrawableLocationNode> Nodes { get; }
 }
