@@ -6,15 +6,15 @@ namespace game.locations.data.chapter_one;
 
 class TrintedRill : ILocation
 {
-    public string Id => nameof(TrintedRill);
+    public string Name => nameof(TrintedRill);
 
     public IEnumerable<Route> ExternalRoutes => throw new NotImplementedException();
 
-    public IEnumerable<DrawableLocationNode> Nodes { get; }
+    public IEnumerable<LocationNode> Nodes { get; }
 
     public TrintedRill()
     {
-        Nodes = new List<DrawableLocationNode>()
+        Nodes = new List<LocationNode>()
         {
         };
     }

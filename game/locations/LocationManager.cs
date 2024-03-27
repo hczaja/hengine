@@ -15,8 +15,8 @@ class LocationManager
         };
     }
 
-    public ILocation GetStartingLocation(Vector2f position)
+    public ILocation GetStartingLocation()
     {
-        return new TrintedRillRegion(position);
+        return new TrintedRillRegion();
     }
 }

@@ -1,4 +1,5 @@
-﻿using game.locations;
+﻿using game.graphics.ui.locations;
+using game.locations;
 using game_engine.events.input;
 using game_engine.graphics.ui;
 using game_engine.logger;
@@ -17,13 +18,13 @@ class LocationPanel : Panel
     private static readonly float _panelHeight = HEngineSettings.Instance.WindowHeight * _panelHeightRatio;
 
     private readonly LocationManager _locationManager;
-    private ILocation CurrentLocation { get; set; }
+    private DrawableLocation CurrentLocation { get; set; }
 
     public LocationPanel(ILogger logger, LocationManager locationManager)
         : base(GetInitialPosition(), GetInitialSize())
     {
         _locationManager = locationManager;
-        CurrentLocation = locationManager.GetStartingLocation(GetInitialPosition());
+        CurrentLocation = new DrawableLocation(locationManager.GetStartingLocation());
     }
 
     internal static Vector2f GetInitialPosition()

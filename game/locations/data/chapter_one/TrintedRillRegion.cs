@@ -7,41 +7,18 @@ namespace game.locations.data.chapter_one;
 
 class TrintedRillRegion : ILocation
 {
-    public string Id => nameof(TrintedRillRegion);
+    public string Name => nameof(TrintedRillRegion);
 
-    private readonly RectangleShape _background;
 
     public IEnumerable<Route> ExternalRoutes { get; }
 
-    public IEnumerable<DrawableLocationNode> Nodes { get; }
+    public IEnumerable<LocationNode> Nodes { get; }
 
-    public TrintedRillRegion(Vector2f position)
+    public TrintedRillRegion()
     {
-        _background = new RectangleShape(new Vector2f(1421, 1152));
-        _background.Position = position;
-        _background.Texture = new Texture("assets/locations/TrintedRillRegion.png");
-
-        Nodes = new List<DrawableLocationNode>()
+        Nodes = new List<LocationNode>()
         {
-            new DrawableLocationNode(new LocationNode("Lumberjack House", 204, 672)),
+            new LocationNode("Lumberjack House", 204, 672),
         };
-    }
-
-    public void Draw(RenderTarget render)
-    {
-        render.Draw(_background);
-
-        foreach (var node in Nodes)
-        {
-            node.Draw(render);
-        }
-    }
-
-    public void Handle(MouseEvent @event)
-    {
-        foreach (var node in Nodes)
-        {
-            node.Handle(@event);
-        }
     }
 }
