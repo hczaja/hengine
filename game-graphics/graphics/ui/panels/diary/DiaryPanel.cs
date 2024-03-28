@@ -50,6 +50,8 @@ public class DiaryPanel : Panel
         QuestList.Handle(@event);
     }
 
+    public override void Handle(MouseEvent @event) { }
+
     public override void Draw(RenderTarget render)
     {
         render.Draw(this);

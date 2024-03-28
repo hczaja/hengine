@@ -44,6 +44,8 @@ public class InventoryPanel : Panel, IEventHandler<ChangeActiveInventoryItemEven
         ActiveItem = EquipedItems.Pointer;
     }
 
+    public override void Handle(MouseEvent @event) { }
+
     internal static Vector2f GetInitialPosition()
         => new Vector2f(
             HEngineSettings.Instance.SmallOffsetX,

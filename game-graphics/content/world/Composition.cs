@@ -66,13 +66,22 @@ internal class Composition :
         var context = @event.Context;
 
         if (context is DiaryContext)
+        {
             MoveOnTop<DiaryPanel>();
+            return;
+        }
 
         if (context is InventoryContext)
+        {
             MoveOnTop<InventoryPanel>();
+            return;
+        }
 
         if (context is LocationContext)
+        {
             MoveOnTop<LocationPanel>();
+            return;
+        }
     }
 
     private void MoveOnTop<T>() where T : Panel
