@@ -1,14 +1,13 @@
-﻿using game.graphics.ui.custom;
-using game.graphics.ui.panels.inventory;
-using game_contracts.assets;
+﻿using game_contracts.assets;
 using game_engine.events;
-using game_engine.graphics.ui;
 using game_engine.settings;
 using game_graphics.events;
+using game_graphics.graphics.ui.custom;
+using game_graphics.graphics.ui.panels.inventory;
 using SFML.Graphics;
 using SFML.System;
 
-namespace game.graphics.ui.panels.diary;
+namespace game_graphics.graphics.ui.panels.diary;
 
 class QuestDescriptionPanel : Panel, IEventHandler<SelectedQuestChangedEvent>
 {

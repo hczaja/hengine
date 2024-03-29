@@ -1,15 +1,15 @@
-﻿using game.graphics.ui.panels;
-using game_contracts.assets;
+﻿using game_contracts.assets;
 using game_contracts.assets.fonts;
 using game_contracts.locations;
 using game_engine.events;
 using game_engine.events.input;
 using game_engine.graphics;
 using game_engine.system;
+using game_graphics.graphics.ui.panels;
 using SFML.Graphics;
 using SFML.System;
 
-namespace game.graphics.ui.locations;
+namespace game_graphics.graphics.ui.locations;
 
 class DrawableLocationNode : IDrawable, IEventHandler<MouseEvent>
 {

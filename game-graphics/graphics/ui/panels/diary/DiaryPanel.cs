@@ -1,14 +1,11 @@
 ﻿using game_contracts.diary;
-using game_engine.events;
+using game_contracts.logger;
 using game_engine.events.input;
-using game_engine.graphics.ui;
-using game_engine.logger;
 using game_engine.settings;
 using SFML.Graphics;
 using SFML.System;
-using SFML.Window;
 
-namespace game.graphics.ui.panels.diary;
+namespace game_graphics.graphics.ui.panels.diary;
 
 public class DiaryPanel : Panel
 {

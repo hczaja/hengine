@@ -1,13 +1,11 @@
 ﻿using game_contracts.assets;
 using game_contracts.assets.fonts;
-using game_engine.events.input;
-using game_engine.graphics.ui;
-using game_engine.logger;
+using game_contracts.logger;
 using game_engine.settings;
 using SFML.Graphics;
 using SFML.System;
 
-namespace game.graphics.ui.panels;
+namespace game_graphics.graphics.ui.panels;
 
 public class ConsolePanel : Panel
 {

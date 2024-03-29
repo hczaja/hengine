@@ -1,12 +1,11 @@
 ﻿using game.character;
-using game.content;
 using game.locations;
 using game.logger;
+using game_contracts.logger;
 using game_engine.content;
 using game_engine.core;
 using game_engine.events.input;
-using game_engine.logger;
-using game_engine.settings;
+using game_graphics.content;
 using SFML.Graphics;
 using SFML.Window;
 
@@ -15,25 +14,14 @@ namespace game.core;
 internal class GameCore : IHEngineCore
 {
     public IContent ActualContent { get; }
-    public IContent CommonContent { get; }
-
-    public Dictionary<string, IContent> ContentRegistry { get; }
 
     private readonly ILogger _logger;
 
     public GameCore()
     {
         var main = new MainContent(new InGameConsoleLogger(), new MainCharacter(), new LocationManager());
-        var common = new StaticContent();
-
-        ContentRegistry = new Dictionary<string, IContent>()
-        {
-            { nameof(MainContent), main },
-            { nameof(StaticContent), common }
-        };
 
         ActualContent = main;
-        CommonContent = common;
     }
 
     public void Render(RenderTarget target)
@@ -44,7 +32,6 @@ internal class GameCore : IHEngineCore
     public void Update()
     {
         ActualContent.Update();
-        CommonContent.Update();
     }
 
     public void _window_KeyPressed(object? sender, KeyEventArgs e) => ActualContent.Handle(new KeyboardEvent(KeyboardEventType.Pressed, e.Code));

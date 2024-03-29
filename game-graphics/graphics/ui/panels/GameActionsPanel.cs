@@ -1,9 +1,8 @@
-﻿using game.context;
-using game_contracts.assets;
+﻿using game_contracts.assets;
 using game_engine.events.input;
-using game_engine.events.system;
-using game_engine.graphics.ui;
 using game_engine.settings;
+using game_graphics.graphics.ui;
+using game_graphics.graphics.ui.panels;
 using SFML.Graphics;
 using SFML.System;
 

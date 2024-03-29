@@ -1,8 +1,5 @@
 ﻿using game_engine.context;
 
-namespace game.context;
+namespace game_graphics.context;
 
-public class InventoryContext : IContext
-{
-
-}
+public class InventoryContext : IContext { }

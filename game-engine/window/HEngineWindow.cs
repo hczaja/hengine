@@ -1,7 +1,6 @@
 ﻿using game_engine.core;
 using game_engine.settings;
 using SFML.Graphics;
-using System.Xml.Linq;
 
 namespace game_engine.window;
 

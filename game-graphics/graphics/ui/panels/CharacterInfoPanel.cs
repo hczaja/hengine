@@ -1,12 +1,11 @@
-﻿using game.graphics.ui.custom;
-using game_contracts.assets;
+﻿using game_contracts.assets;
 using game_contracts.character;
-using game_engine.graphics.ui;
 using game_engine.settings;
+using game_graphics.graphics.ui.custom;
 using SFML.Graphics;
 using SFML.System;
 
-namespace game.graphics.ui.panels;
+namespace game_graphics.graphics.ui.panels;
 
 public class CharacterInfoPanel : Panel
 {

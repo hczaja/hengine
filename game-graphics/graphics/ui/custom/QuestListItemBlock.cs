@@ -1,13 +1,13 @@
-﻿using game.graphics.ui.panels.diary;
-using game_contracts.assets;
+﻿using game_contracts.assets;
 using game_contracts.assets.fonts;
 using game_contracts.diary;
 using game_engine.graphics;
 using game_engine.settings;
+using game_graphics.graphics.ui.panels.diary;
 using SFML.Graphics;
 using SFML.System;
 
-namespace game.graphics.ui.custom;
+namespace game_graphics.graphics.ui.custom;
 
 class QuestListItemBlock : IDrawable
 {

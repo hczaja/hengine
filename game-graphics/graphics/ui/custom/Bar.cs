@@ -1,10 +1,9 @@
 ﻿using game_contracts.assets;
 using game_contracts.assets.fonts;
-using game_engine.graphics.ui;
 using SFML.Graphics;
 using SFML.System;
 
-namespace game.graphics.ui.custom;
+namespace game_graphics.graphics.ui.custom;
 
 internal class Bar : BaseBar
 {

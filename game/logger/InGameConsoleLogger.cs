@@ -1,4 +1,4 @@
-﻿using game_engine.logger;
+﻿using game_contracts.logger;
 using System.Text;
 
 namespace game.logger

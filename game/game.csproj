@@ -5,7 +5,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\game-contracts\game-contracts.csproj" />
     <ProjectReference Include="..\game-graphics\game-graphics.csproj" />
   </ItemGroup>
  

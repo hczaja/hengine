@@ -1,6 +1,3 @@
 ﻿namespace game_engine.context;
 
-public interface IContext
-{
-
-}
+public interface IContext { }

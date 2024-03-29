@@ -1,8 +1,7 @@
-﻿using game_engine.graphics.ui;
-using SFML.Graphics;
+﻿using SFML.Graphics;
 using SFML.System;
 
-namespace game.graphics.ui.tooltips;
+namespace game_graphics.graphics.ui.tooltips;
 
 class InformationNotification : Notification
 {

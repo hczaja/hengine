@@ -2,7 +2,7 @@
 using SFML.Graphics;
 using SFML.System;
 
-namespace game.graphics.ui.custom;
+namespace game_graphics.graphics.ui.custom;
 
 public class InventoryItemBlock : IDrawable
 {

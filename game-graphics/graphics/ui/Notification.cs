@@ -2,8 +2,9 @@
 using game_engine.events;
 using SFML.Graphics;
 using SFML.System;
+using game_engine.graphics;
 
-namespace game_engine.graphics.ui;
+namespace game_graphics.graphics.ui;
 
 public abstract class Notification : RectangleShape, IDrawable, IEventHandler<MouseEvent>
 {

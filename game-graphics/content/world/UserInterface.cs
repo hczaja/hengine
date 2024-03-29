@@ -1,15 +1,16 @@
 ﻿using game.graphics.ui.panels;
 using game_contracts.character;
+using game_contracts.logger;
 using game_engine.content;
 using game_engine.events;
 using game_engine.events.input;
 using game_engine.events.system;
 using game_engine.graphics;
-using game_engine.graphics.ui;
-using game_engine.logger;
+using game_graphics.graphics.ui;
+using game_graphics.graphics.ui.panels;
 using SFML.Graphics;
 
-namespace game.content.world;
+namespace game_graphics.content.world;
 
 internal class UserInterface :
     IDrawable,

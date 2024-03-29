@@ -1,4 +1,4 @@
-﻿namespace game_engine.logger;
+﻿namespace game_contracts.logger;
 
 public interface ILogger
 {

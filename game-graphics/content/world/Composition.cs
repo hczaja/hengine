@@ -2,17 +2,17 @@
 using game_engine.events;
 using game_engine.graphics;
 using SFML.Graphics;
-using game_engine.graphics.ui;
-using game.graphics.ui.panels;
 using game_engine.events.system;
-using game.context;
-using game_engine.logger;
-using game.graphics.ui.panels.inventory;
-using game.graphics.ui.panels.diary;
 using game_contracts.character;
 using game_contracts.locations;
+using game_contracts.logger;
+using game_graphics.context;
+using game_graphics.graphics.ui.panels.diary;
+using game_graphics.graphics.ui.panels;
+using game_graphics.graphics.ui;
+using game_graphics.graphics.ui.panels.inventory;
 
-namespace game.content.world;
+namespace game_graphics.content.world;
 
 internal class Composition :
     IDrawable,

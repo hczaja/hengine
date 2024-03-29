@@ -1,8 +1,4 @@
-﻿using game.graphics.ui.locations;
-using game_contracts.locations;
-using game_engine.events.input;
-using SFML.Graphics;
-using SFML.System;
+﻿using game_contracts.locations;
 
 namespace game.locations.data.chapter_one;
 

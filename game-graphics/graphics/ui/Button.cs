@@ -4,7 +4,7 @@ using game_engine.system;
 using SFML.Graphics;
 using SFML.System;
 
-namespace game_engine.graphics.ui;
+namespace game_graphics.graphics.ui;
 
 public class Button :
     RectangleShape,

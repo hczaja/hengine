@@ -1,16 +1,16 @@
-﻿using game.graphics.ui.custom;
-using game_contracts.inventory;
+﻿using game_contracts.inventory;
+using game_contracts.logger;
 using game_engine.events;
 using game_engine.events.input;
-using game_engine.graphics.ui;
-using game_engine.logger;
 using game_engine.settings;
 using game_graphics.events;
+using game_graphics.graphics.ui.custom;
 using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
 
-namespace game.graphics.ui.panels.inventory;
+namespace game_graphics.graphics.ui.panels.inventory;
+
 
 public class InventoryPanel : Panel, IEventHandler<ChangeActiveInventoryItemEvent>
 {

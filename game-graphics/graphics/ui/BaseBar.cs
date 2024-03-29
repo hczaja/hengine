@@ -1,7 +1,8 @@
-﻿using SFML.Graphics;
+﻿using game_engine.graphics;
+using SFML.Graphics;
 using SFML.System;
 
-namespace game_engine.graphics.ui;
+namespace game_graphics.graphics.ui;
 
 public abstract class BaseBar : RectangleShape, IDrawable
 {

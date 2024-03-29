@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\game-contracts\game-contracts.csproj" />
-    <ProjectReference Include="..\game-engine\game-engine.csproj" />
   </ItemGroup>
 
   <ItemGroup>

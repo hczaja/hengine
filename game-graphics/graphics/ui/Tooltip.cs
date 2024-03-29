@@ -1,9 +1,8 @@
-﻿using game_engine.events.input;
-using game_engine.events;
+﻿using game_engine.graphics;
 using SFML.Graphics;
 using SFML.System;
 
-namespace game_engine.graphics.ui;
+namespace game_graphics.graphics.ui;
 
 public abstract class Tooltip : RectangleShape, IDrawable
 {

@@ -1,6 +1,5 @@
 ﻿using game.locations.data.chapter_one;
 using game_contracts.locations;
-using SFML.System;
 
 namespace game.locations;
 

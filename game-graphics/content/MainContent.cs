@@ -1,13 +1,13 @@
-﻿using game.content.world;
-using game_contracts.character;
+﻿using game_contracts.character;
 using game_contracts.locations;
+using game_contracts.logger;
 using game_engine.content;
 using game_engine.events.input;
 using game_engine.events.system;
-using game_engine.logger;
+using game_graphics.content.world;
 using SFML.Graphics;
 
-namespace game.content;
+namespace game_graphics.content;
 
 public class MainContent : IContent
 {

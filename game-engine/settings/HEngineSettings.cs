@@ -1,5 +1,4 @@
 ﻿using game_engine.standards;
-using SFML.Graphics;
 using SFML.Window;
 
 namespace game_engine.settings;
