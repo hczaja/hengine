@@ -13,32 +13,33 @@ namespace game.core;
 
 internal class GameCore : IHEngineCore
 {
-    public IContent ActualContent { get; }
-
+    private readonly IContent _content;
     private readonly ILogger _logger;
 
     public GameCore()
     {
-        var main = new MainContent(new InGameConsoleLogger(), new MainCharacter(), new LocationManager());
-
-        ActualContent = main;
+        _logger = new InGameConsoleLogger();
+        _content = new MainContent(
+            _logger, 
+            new MainCharacter(_logger), 
+            new LocationManager(_logger));
     }
 
     public void Render(RenderTarget target)
     {
-        ActualContent.Draw(target);
+        _content.Draw(target);
     }
 
     public void Update()
     {
-        ActualContent.Update();
+        _content.Update();
     }
 
-    public void _window_KeyPressed(object? sender, KeyEventArgs e) => ActualContent.Handle(new KeyboardEvent(KeyboardEventType.Pressed, e.Code));
+    public void _window_KeyPressed(object? sender, KeyEventArgs e) => _content.Handle(new KeyboardEvent(KeyboardEventType.Pressed, e.Code));
 
-    public void _window_KeyReleased(object? sender, KeyEventArgs e) => ActualContent.Handle(new KeyboardEvent(KeyboardEventType.Released, e.Code));
+    public void _window_KeyReleased(object? sender, KeyEventArgs e) => _content.Handle(new KeyboardEvent(KeyboardEventType.Released, e.Code));
 
-    public void _window_MouseButtonPressed(object? sender, MouseButtonEventArgs e) => ActualContent.Handle(new MouseEvent(MouseEventType.Pressed, e.X, e.Y, e.Button));
+    public void _window_MouseButtonPressed(object? sender, MouseButtonEventArgs e) => _content.Handle(new MouseEvent(MouseEventType.Pressed, e.X, e.Y, e.Button));
 
-    public void _window_MouseButtonReleased(object? sender, MouseButtonEventArgs e) => ActualContent.Handle(new MouseEvent(MouseEventType.Released, e.X, e.Y, e.Button));
+    public void _window_MouseButtonReleased(object? sender, MouseButtonEventArgs e) => _content.Handle(new MouseEvent(MouseEventType.Released, e.X, e.Y, e.Button));
 }
