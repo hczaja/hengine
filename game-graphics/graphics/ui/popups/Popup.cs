@@ -9,11 +9,6 @@ namespace game_graphics.graphics.ui.popups;
 abstract class Popup
 {
     IEnumerable<PopupItem> Items { get; }
-
-    protected Popup()
-    {
-        
-    }
 }
 
 class SingleOptionPopup : Popup
