@@ -11,21 +11,6 @@ abstract class Popup
     IEnumerable<PopupItem> Items { get; }
 }
 
-class SingleOptionPopup : Popup
-{
-
-}
-
-class TwoOptionsPopup : Popup
-{
-
-}
-
-class TripleOptionsPopup : Popup
-{ 
-}
-
-
 class PopupItem : RectangleShape, IEventHandler<MouseEvent>
 {
     private Action Callback { get; }
