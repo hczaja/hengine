@@ -6,6 +6,7 @@ using game_engine.events.input;
 using game_engine.graphics;
 using game_engine.system;
 using game_graphics.graphics.ui.panels;
+using game_graphics.graphics.ui.popups;
 using SFML.Graphics;
 using SFML.System;
 
@@ -13,13 +14,17 @@ namespace game_graphics.graphics.ui.locations;
 
 class DrawableLocationNode : IDrawable, IEventHandler<MouseEvent>
 {
+    private readonly IPopupService _popupService;
+
     private static float _circleRadius = 24f;
 
     CircleShape Circle { get; }
     Text Name { get; }
 
-    public DrawableLocationNode(LocationNode node)
+    public DrawableLocationNode(IPopupService popupService, LocationNode node)
     {
+        _popupService = popupService;
+
         var parentPosition = LocationPanel.GetInitialPosition();
 
         Circle = new CircleShape(_circleRadius);
@@ -29,13 +34,13 @@ class DrawableLocationNode : IDrawable, IEventHandler<MouseEvent>
         Circle.OutlineThickness = 1;
 
         Name = new Text(
-            node.Name, 
-            RetroGamingFont.Instance.Font, 
+            node.Name,
+            RetroGamingFont.Instance.Font,
             RetroGamingFont.Instance.GetLocationNameFontSize());
-        
-        var size = Name.GetLocalBounds();
+
         Name.Position = Circle.GetCenterPosition()
-            - new Vector2f(size.Width / 2f, Circle.Radius + 2f * size.Height);
+            - GetCircleCenterOffsetX()
+            - GetCircleCenterOffsetY();
     }
 
     public void Draw(RenderTarget render)
@@ -51,10 +56,28 @@ class DrawableLocationNode : IDrawable, IEventHandler<MouseEvent>
 
         var center = Circle.GetCenterPosition();
         if (!center.IsMouseEventRaisedInCircle(Circle.Radius, @event))
+        {
+            _popupService.RemoveLatest();
             return;
+        }
 
-        //_popupService.Add(new MultipleOptionsPopup(
-        //    new PopupOption(),
-        //    new PopupOption()));
+        _popupService.Add(
+            new Popup(
+                Name.DisplayedString,
+                Circle.GetCenterPosition()
+                    + GetCircleCenterOffsetY()
+            ));
+    }
+
+    private Vector2f GetCircleCenterOffsetX()
+    {
+        var size = Name.GetLocalBounds();
+        return new Vector2f(size.Width / 2f, 0f);
+    }
+
+    private Vector2f GetCircleCenterOffsetY()
+    {
+        var size = Name.GetLocalBounds();
+        return new Vector2f(0f, Circle.Radius + 2f * size.Height);
     }
 }

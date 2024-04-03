@@ -3,6 +3,7 @@ using game_contracts.logger;
 using game_engine.events.input;
 using game_engine.settings;
 using game_graphics.graphics.ui.locations;
+using game_graphics.graphics.ui.popups;
 using SFML.Graphics;
 using SFML.System;
 
@@ -17,13 +18,16 @@ public class LocationPanel : Panel
     private static readonly float _panelHeight = HEngineSettings.Instance.WindowHeight * _panelHeightRatio;
 
     private readonly ILocationManager _locationManager;
+    private readonly IPopupService _popupService;
     private DrawableLocation CurrentLocation { get; set; }
 
     public LocationPanel(ILogger logger, ILocationManager locationManager)
         : base(GetInitialPosition(), GetInitialSize())
     {
         _locationManager = locationManager;
-        CurrentLocation = new DrawableLocation(locationManager.GetStartingLocation());
+        _popupService = new PopupService();
+
+        CurrentLocation = new DrawableLocation(_popupService, locationManager.GetStartingLocation());
     }
 
     internal static Vector2f GetInitialPosition()
@@ -38,10 +42,12 @@ public class LocationPanel : Panel
     {
         render.Draw(this);
         CurrentLocation.Draw(render);
+        _popupService.Draw(render);
     }
 
     public override void Handle(MouseEvent @event)
     {
         CurrentLocation.Handle(@event);
+        _popupService.Handle(@event);
     }
 }
