@@ -47,7 +47,7 @@ public class LocationPanel : Panel
 
     public override void Handle(MouseEvent @event)
     {
-        CurrentLocation.Handle(@event);
         _popupService.Handle(@event);
+        CurrentLocation.Handle(@event);
     }
 }

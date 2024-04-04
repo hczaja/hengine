@@ -21,8 +21,12 @@ class PopupService : IPopupService
 
     public void Add(IPopup popup)
     {
+
         if (!_popups.Any(p => p.ParentId == popup.ParentId))
+        {
+            RemoveLatest();
             _popups.Push(popup);
+        }
     }
 
     public void RemoveLatest()
