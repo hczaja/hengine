@@ -6,13 +6,6 @@ namespace game_graphics.graphics.ui.popups;
 class PopupService : IPopupService
 {
     private Stack<IPopup> _popups;
-    private IPopup GetLatest()
-    {
-        if (_popups.TryPeek(out var popup))
-            return popup;
-
-        return null;
-    }
 
     public PopupService()
     {
@@ -21,7 +14,6 @@ class PopupService : IPopupService
 
     public void Add(IPopup popup)
     {
-
         if (!_popups.Any(p => p.ParentId == popup.ParentId))
         {
             RemoveLatest();
@@ -50,5 +42,13 @@ class PopupService : IPopupService
             return;
 
         latest.Handle(@event);
+    }
+
+    private IPopup GetLatest()
+    {
+        if (_popups.TryPeek(out var popup))
+            return popup;
+
+        return null;
     }
 }

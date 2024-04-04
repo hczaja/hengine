@@ -1,7 +1,6 @@
 ﻿using game_contracts.assets;
 using game_engine.events;
 using game_engine.events.input;
-using game_engine.settings;
 using game_engine.system;
 using game_graphics.graphics.ui.panels;
 using SFML.Graphics;

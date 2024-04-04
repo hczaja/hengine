@@ -5,6 +5,7 @@ using game_engine.events;
 using game_engine.events.input;
 using game_engine.graphics;
 using game_engine.system;
+using game_graphics.graphics.ui.notifications;
 using game_graphics.graphics.ui.panels;
 using game_graphics.graphics.ui.popups;
 using SFML.Graphics;
@@ -15,15 +16,17 @@ namespace game_graphics.graphics.ui.locations;
 class DrawableLocationNode : IDrawable, IEventHandler<MouseEvent>
 {
     private readonly IPopupService _popupService;
+    private readonly INotificationService _notificationService;
 
     private static float _circleRadius = 24f;
 
     CircleShape Circle { get; }
     Text Name { get; }
 
-    public DrawableLocationNode(IPopupService popupService, LocationNode node)
+    public DrawableLocationNode(IPopupService popupService, INotificationService notificationService, LocationNode node)
     {
         _popupService = popupService;
+        _notificationService = notificationService;
 
         var parentPosition = LocationPanel.GetInitialPosition();
 
@@ -61,12 +64,15 @@ class DrawableLocationNode : IDrawable, IEventHandler<MouseEvent>
             return;
         }
 
-        _popupService.Add(
-            new Popup(
-                Name.DisplayedString,
-                Circle.GetCenterPosition()
-                    + GetCircleCenterOffsetY()
-            ));
+        //_popupService.Add(
+        //    new Popup(
+        //        Name.DisplayedString,
+        //        Circle.GetCenterPosition()
+        //            + GetCircleCenterOffsetY()
+        //    ));
+
+        _notificationService.Add(
+            new ConfirmationNotification());
     }
 
     private Vector2f GetCircleCenterOffsetX()

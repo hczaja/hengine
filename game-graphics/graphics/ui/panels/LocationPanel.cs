@@ -3,6 +3,7 @@ using game_contracts.logger;
 using game_engine.events.input;
 using game_engine.settings;
 using game_graphics.graphics.ui.locations;
+using game_graphics.graphics.ui.notifications;
 using game_graphics.graphics.ui.popups;
 using SFML.Graphics;
 using SFML.System;
@@ -19,15 +20,18 @@ public class LocationPanel : Panel
 
     private readonly ILocationManager _locationManager;
     private readonly IPopupService _popupService;
+    private readonly INotificationService _notificationService;
     private DrawableLocation CurrentLocation { get; set; }
 
     public LocationPanel(ILogger logger, ILocationManager locationManager)
         : base(GetInitialPosition(), GetInitialSize())
     {
         _locationManager = locationManager;
-        _popupService = new PopupService();
 
-        CurrentLocation = new DrawableLocation(_popupService, locationManager.GetStartingLocation());
+        _popupService = new PopupService();
+        _notificationService = new NotificationService();
+
+        CurrentLocation = new DrawableLocation(_popupService, _notificationService, locationManager.GetStartingLocation());
     }
 
     internal static Vector2f GetInitialPosition()
@@ -42,12 +46,16 @@ public class LocationPanel : Panel
     {
         render.Draw(this);
         CurrentLocation.Draw(render);
+
         _popupService.Draw(render);
+        _notificationService.Draw(render);
     }
 
     public override void Handle(MouseEvent @event)
     {
         _popupService.Handle(@event);
+        _notificationService.Handle(@event);
+
         CurrentLocation.Handle(@event);
     }
 }
