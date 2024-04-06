@@ -40,6 +40,6 @@ internal class GameCore : IHEngineCore
     public void _window_KeyReleased(object? sender, KeyEventArgs e) => _content.Handle(new KeyboardEvent(KeyboardEventType.Released, e.Code));
 
     public void _window_MouseButtonPressed(object? sender, MouseButtonEventArgs e) => _content.Handle(new MouseEvent(MouseEventType.Pressed, e.X, e.Y, e.Button));
-
+    
     public void _window_MouseButtonReleased(object? sender, MouseButtonEventArgs e) => _content.Handle(new MouseEvent(MouseEventType.Released, e.X, e.Y, e.Button));
 }

@@ -64,15 +64,15 @@ class DrawableLocationNode : IDrawable, IEventHandler<MouseEvent>
             return;
         }
 
-        //_popupService.Add(
-        //    new Popup(
-        //        Name.DisplayedString,
-        //        Circle.GetCenterPosition()
-        //            + GetCircleCenterOffsetY()
-        //    ));
+        _popupService.Add(
+            new Popup(
+                Name.DisplayedString,
+                Circle.GetCenterPosition()
+                    + GetCircleCenterOffsetY()
+            ));
 
-        _notificationService.Add(
-            new ConfirmationNotification());
+        //_notificationService.Add(
+        //    new ConfirmationNotification());
     }
 
     private Vector2f GetCircleCenterOffsetX()
