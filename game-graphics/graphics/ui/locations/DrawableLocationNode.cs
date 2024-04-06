@@ -86,4 +86,10 @@ class DrawableLocationNode : IDrawable, IEventHandler<MouseEvent>
         var size = Name.GetLocalBounds();
         return new Vector2f(0f, Circle.Radius + 2f * size.Height);
     }
+
+    internal void SwipeNode(Vector2f vector)
+    {
+        Circle.Position += vector;
+        Name.Position += vector;
+    }
 }

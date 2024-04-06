@@ -2,9 +2,11 @@
 using game_engine.events;
 using game_engine.events.input;
 using game_engine.graphics;
+using game_engine.system;
 using game_graphics.graphics.ui.panels;
 using SFML.Graphics;
 using SFML.System;
+using SFML.Window;
 
 namespace game_graphics.graphics.ui.locations;
 
@@ -36,9 +38,39 @@ class DrawableLocation : IDrawable, IEventHandler<MouseEvent>
 
     public void Handle(MouseEvent @event)
     {
+        if (@event.Button == Mouse.Button.Right 
+            && @event.Type == MouseEventType.Pressed)
+        {
+            SaveCursorPosition(@event.X, @event.Y);
+            return;
+        }
+
+        if (@event.Button == Mouse.Button.Right
+            && @event.Type == MouseEventType.Released)
+        {
+            SwipeMap(@event.X, @event.Y);
+            return;
+        }
+
         foreach (var node in _nodes)
         {
             node.Handle(@event);
+        }
+    }
+
+    private Vector2f CursorPosition { get; set; }
+    private void SaveCursorPosition(float x, float y)
+        => CursorPosition = new Vector2f(x, y);
+
+    private void SwipeMap(float x, float y)
+    {
+        var newCursorPosition = new Vector2f(x, y);
+        var vector = newCursorPosition - CursorPosition;
+
+        _background.Position += -vector;
+        foreach (var node in _nodes)
+        {
+            node.SwipeNode(-vector);
         }
     }
 }
