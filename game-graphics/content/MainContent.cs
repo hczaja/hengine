@@ -18,6 +18,8 @@ public class MainContent : IContent
 
     public MainContent(ILogger logger, ICharacter character, ILocationManager locationManager)
     {
+        _logger = logger;
+
         UI = new UserInterface(this, logger, character);
         Composition = new Composition(logger, character, locationManager);
     }
