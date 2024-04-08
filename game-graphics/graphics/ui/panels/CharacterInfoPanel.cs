@@ -66,11 +66,11 @@ public class CharacterInfoPanel : Panel
             _panelWidth,
             _panelHeight);
 
-    public override void Draw(RenderTarget render)
+    public override void DrawBy(RenderTarget render)
     {
         render.Draw(Avatar);
-        
-        HealthBar.Draw(render);
-        EnergyBar.Draw(render);
+
+        HealthBar.DrawBy(render);
+        EnergyBar.DrawBy(render);
     }
 }

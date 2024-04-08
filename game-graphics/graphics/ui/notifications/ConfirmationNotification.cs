@@ -20,7 +20,7 @@ class ConfirmationNotification : RectangleShape, INotification
         FillColor = Color.White;
     }
 
-    public void Draw(RenderTarget render)
+    public void DrawBy(RenderTarget render)
     {
         render.Draw(this);
     }

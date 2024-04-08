@@ -97,12 +97,12 @@ public class InventoryPanel : Panel, IEventHandler<ChangeActiveInventoryItemEven
         }
     }
 
-    public override void Draw(RenderTarget render)
+    public override void DrawBy(RenderTarget render)
     {
         render.Draw(this);
 
-        EquipedItems.Draw(render);
-        Backpack.Draw(render);
+        EquipedItems.DrawBy(render);
+        Backpack.DrawBy(render);
 
         if (ActivePanel is not null)
         {
@@ -111,7 +111,7 @@ public class InventoryPanel : Panel, IEventHandler<ChangeActiveInventoryItemEven
 
         if (ActiveItem is not null)
         {
-            ActiveItem.Draw(render);
+            ActiveItem.DrawBy(render);
         }
     }
 

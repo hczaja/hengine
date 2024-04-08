@@ -19,7 +19,7 @@ public abstract class Panel : RectangleShape,
         FillColor = Color.White;
     }
 
-    public virtual void Draw(RenderTarget render) => throw new NotImplementedException();
+    public virtual void DrawBy(RenderTarget render) => throw new NotImplementedException();
     public virtual new void Update() => throw new NotImplementedException();
     public virtual void Handle(MouseEvent @event) => throw new NotImplementedException();
     public virtual void Handle(ChangeContextEvent @event) => throw new NotImplementedException();

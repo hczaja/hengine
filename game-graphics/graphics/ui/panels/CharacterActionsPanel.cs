@@ -39,7 +39,7 @@ public class CharacterActionsPanel : Panel
         Handle(new ChangeContextEvent(new LocationContext()));
     }
 
-    public override void Draw(RenderTarget render)
+    public override void DrawBy(RenderTarget render)
     {
         render.Draw(this);
         foreach (var action in Actions)

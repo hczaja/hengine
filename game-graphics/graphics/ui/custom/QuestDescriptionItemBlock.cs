@@ -35,7 +35,7 @@ class QuestDescriptionItemBlock : IDrawable, IEventHandler<SelectedQuestChangedE
     }
 
 
-    public void Draw(RenderTarget render)
+    public void DrawBy(RenderTarget render)
     {
         render.Draw(Title);
         render.Draw(Author);

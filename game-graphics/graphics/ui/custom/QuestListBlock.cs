@@ -37,10 +37,10 @@ class QuestListBlock : IDrawable
 
     public IQuest GetQuest() => Pointer?.Quest;
 
-    public void Draw(RenderTarget render)
+    public void DrawBy(RenderTarget render)
     {
         foreach (var item in QuestsBlocks)
-            item.Draw(render);
+            item.DrawBy(render);
     }
 
     public void SwitchTab()

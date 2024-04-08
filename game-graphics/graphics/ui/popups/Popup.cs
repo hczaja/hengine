@@ -33,7 +33,7 @@ class Popup : RectangleShape, IPopup
     internal static Vector2f GetInitialSize()
         => new Vector2f(_popupItemSize.X * 2f, _popupItemSize.Y * 1.5f);
 
-    public void Draw(RenderTarget render)
+    public void DrawBy(RenderTarget render)
     {
         render.Draw(this);
     }

@@ -38,9 +38,9 @@ internal class Composition :
         Panels.Push(new LocationPanel(_logger, locationManager));
     }
 
-    public void Draw(RenderTarget render)
+    public void DrawBy(RenderTarget render)
     {
-        Top.Draw(render);
+        Top.DrawBy(render);
     }
 
     public void Update()

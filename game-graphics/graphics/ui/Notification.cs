@@ -14,6 +14,6 @@ public abstract class Notification : RectangleShape, IDrawable, IEventHandler<Mo
         FillColor = Color.Yellow;
     }
 
-    public virtual void Draw(RenderTarget render) => throw new NotImplementedException();
+    public virtual void DrawBy(RenderTarget render) => throw new NotImplementedException();
     public virtual void Handle(MouseEvent @event) => throw new NotImplementedException();
 }

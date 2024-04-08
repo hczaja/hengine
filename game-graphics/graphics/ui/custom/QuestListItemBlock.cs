@@ -43,7 +43,7 @@ class QuestListItemBlock : IDrawable
         Text.Position = Shape.Position;
     }
 
-    public void Draw(RenderTarget render)
+    public void DrawBy(RenderTarget render)
     {
         render.Draw(Shape);
         render.Draw(Text);

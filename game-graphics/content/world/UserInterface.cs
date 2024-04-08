@@ -41,9 +41,9 @@ internal class UserInterface :
         GameActionsPanel = new GameActionsPanel();
     }
 
-    public void Draw(RenderTarget render)
+    public void DrawBy(RenderTarget render)
     {
-        CharacterInfoPanel.Draw(render);
+        CharacterInfoPanel.DrawBy(render);
         //CharacterActionsPanel.Draw(render);
         //ConsolePanel.Draw(render);
         //GameActionsPanel.Draw(render);

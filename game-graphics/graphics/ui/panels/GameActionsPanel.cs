@@ -28,7 +28,7 @@ public class GameActionsPanel : Panel
         Actions = GetGameActions();
     }
 
-    public override void Draw(RenderTarget render)
+    public override void DrawBy(RenderTarget render)
     {
         render.Draw(this);
         foreach (var action in Actions)

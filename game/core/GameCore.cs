@@ -27,7 +27,7 @@ internal class GameCore : IHEngineCore
 
     public void Render(RenderTarget target)
     {
-        _content.Draw(target);
+        _content.DrawBy(target);
     }
 
     public void Update()

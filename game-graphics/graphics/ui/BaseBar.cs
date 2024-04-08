@@ -22,7 +22,7 @@ public abstract class BaseBar : RectangleShape, IDrawable
         CurrentValue = startValue;
     }
 
-    public void Draw(RenderTarget render)
+    public void DrawBy(RenderTarget render)
     {
         render.Draw(this);
         render.Draw(Text);

@@ -4,5 +4,5 @@ namespace game_engine.graphics;
 
 public interface IDrawable
 {
-    void Draw(RenderTarget render);
+    void DrawBy(RenderTarget render);
 }

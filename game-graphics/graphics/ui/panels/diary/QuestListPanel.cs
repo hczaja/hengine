@@ -57,13 +57,13 @@ internal class QuestListPanel : Panel
     internal static Vector2f GetInitialSize()
         => new Vector2f(_panelWidth, _panelHeight);
 
-    public override void Draw(RenderTarget render)
+    public override void DrawBy(RenderTarget render)
     {
         render.Draw(this);
 
-        QuestListBlock.Draw(render);
-        ActiveQuestsTab.Draw(render);
-        FinishedQuestsTab.Draw(render);
+        QuestListBlock.DrawBy(render);
+        ActiveQuestsTab.DrawBy(render);
+        FinishedQuestsTab.DrawBy(render);
     }
 
     public override void Handle(KeyboardEvent @event)

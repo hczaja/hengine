@@ -39,7 +39,7 @@ class CharacteristicBlock : IDrawable
         };
     }
 
-    public void Draw(RenderTarget render)
+    public void DrawBy(RenderTarget render)
     {
         render.Draw(Icon);
         render.Draw(Text);

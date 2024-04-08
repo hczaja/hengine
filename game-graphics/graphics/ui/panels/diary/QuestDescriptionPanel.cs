@@ -43,10 +43,10 @@ class QuestDescriptionPanel : Panel, IEventHandler<SelectedQuestChangedEvent>
     internal static Vector2f GetInitialSize()
         => new Vector2f(_panelWidth, _panelHeight);
 
-    public override void Draw(RenderTarget render)
+    public override void DrawBy(RenderTarget render)
     {
         render.Draw(this);
-        DescriptionBlock.Draw(render);
+        DescriptionBlock.DrawBy(render);
     }
 
     public void Handle(SelectedQuestChangedEvent @event)

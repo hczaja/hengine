@@ -24,10 +24,10 @@ public class MainContent : IContent
         Composition = new Composition(logger, character, locationManager);
     }
 
-    public void Draw(RenderTarget render)
+    public void DrawBy(RenderTarget render)
     {
-        Composition.Draw(render);
-        UI.Draw(render);
+        Composition.DrawBy(render);
+        UI.DrawBy(render);
     }
 
     public void Handle(MouseEvent @event)

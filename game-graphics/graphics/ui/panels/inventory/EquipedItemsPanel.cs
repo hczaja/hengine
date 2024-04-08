@@ -146,10 +146,10 @@ class EquipedItemsPanel : Panel
         return index;
     }
 
-    public override void Draw(RenderTarget render)
+    public override void DrawBy(RenderTarget render)
     {
         render.Draw(this);
         foreach (var item in Equiped)
-            item.Draw(render);
+            item.DrawBy(render);
     }
 }

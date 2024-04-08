@@ -44,12 +44,12 @@ public class LocationPanel : Panel
             _panelWidth,
             _panelHeight);
 
-    public override void Draw(RenderTarget render)
+    public override void DrawBy(RenderTarget render)
     {
-        CurrentLocation.Draw(render);
+        CurrentLocation.DrawBy(render);
 
-        _popupService.Draw(render);
-        _notificationService.Draw(render);
+        _popupService.DrawBy(render);
+        _notificationService.DrawBy(render);
     }
 
     public override void Handle(MouseEvent @event)

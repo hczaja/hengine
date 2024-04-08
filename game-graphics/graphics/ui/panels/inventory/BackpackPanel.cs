@@ -143,10 +143,10 @@ class BackpackPanel : Panel
         return index;
     }
 
-    public override void Draw(RenderTarget render)
+    public override void DrawBy(RenderTarget render)
     {
         render.Draw(this);
         foreach (var itemBlock in Backpack)
-            itemBlock.Draw(render);
+            itemBlock.DrawBy(render);
     }
 }

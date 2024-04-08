@@ -49,11 +49,11 @@ public class DiaryPanel : Panel
 
     public override void Handle(MouseEvent @event) { }
 
-    public override void Draw(RenderTarget render)
+    public override void DrawBy(RenderTarget render)
     {
         render.Draw(this);
 
-        QuestList.Draw(render);
-        QuestDescription.Draw(render);
+        QuestList.DrawBy(render);
+        QuestDescription.DrawBy(render);
     }
 }

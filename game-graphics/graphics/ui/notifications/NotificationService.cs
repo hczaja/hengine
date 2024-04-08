@@ -17,12 +17,12 @@ class NotificationService : INotificationService
         _notifications.Push(notification);
     }
 
-    public void Draw(RenderTarget render)
+    public void DrawBy(RenderTarget render)
     {
         var latest = GetLatest();
         if (latest is not null)
         {
-            latest.Draw(render);
+            latest.DrawBy(render);
         }
     }
 

@@ -25,13 +25,13 @@ class DrawableLocation : IDrawable, IEventHandler<MouseEvent>
             location.Nodes.Select(node => new DrawableLocationNode(popupService, notificationService, node)));
     }
 
-    public void Draw(RenderTarget render)
+    public void DrawBy(RenderTarget render)
     {
         render.Draw(_background);
 
         foreach (var node in _nodes)
         {
-            node.Draw(render);
+            node.DrawBy(render);
         }
     }
 

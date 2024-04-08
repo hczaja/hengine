@@ -12,5 +12,5 @@ public abstract class Tooltip : RectangleShape, IDrawable
         FillColor = Color.Green;
     }
 
-    public virtual void Draw(RenderTarget render) => throw new NotImplementedException();
+    public virtual void DrawBy(RenderTarget render) => throw new NotImplementedException();
 }

@@ -26,12 +26,12 @@ class PopupService : IPopupService
         _popups.TryPop(out var _);
     }
 
-    public void Draw(RenderTarget render)
+    public void DrawBy(RenderTarget render)
     {
         var latest = GetLatest();
         if (latest is not null)
         {
-            latest.Draw(render);
+            latest.DrawBy(render);
         }
     }
 

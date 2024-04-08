@@ -24,7 +24,7 @@ class QuestListTab : IDrawable
         Shape.Position = parentPos + new Vector2f(index * size.X, 0f);
     }
 
-    public void Draw(RenderTarget render)
+    public void DrawBy(RenderTarget render)
     {
         render.Draw(Shape);
     }

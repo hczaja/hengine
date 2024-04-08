@@ -38,7 +38,7 @@ public class ConsolePanel : Panel
         _logger.OnLog += (_, _) => UpdateDisplay();
     }
 
-    public override void Draw(RenderTarget render)
+    public override void DrawBy(RenderTarget render)
     {
         render.Draw(this);
         render.Draw(Text);

@@ -46,7 +46,7 @@ class DrawableLocationNode : IDrawable, IEventHandler<MouseEvent>
             - GetCircleCenterOffsetY();
     }
 
-    public void Draw(RenderTarget render)
+    public void DrawBy(RenderTarget render)
     {
         render.Draw(Circle);
         render.Draw(Name);
