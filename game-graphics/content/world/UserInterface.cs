@@ -44,9 +44,9 @@ internal class UserInterface :
     public void Draw(RenderTarget render)
     {
         CharacterInfoPanel.Draw(render);
-        CharacterActionsPanel.Draw(render);
-        ConsolePanel.Draw(render);
-        GameActionsPanel.Draw(render);
+        //CharacterActionsPanel.Draw(render);
+        //ConsolePanel.Draw(render);
+        //GameActionsPanel.Draw(render);
     }
 
     public void Handle(MouseEvent @event)

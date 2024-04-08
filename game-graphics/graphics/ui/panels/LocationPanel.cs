@@ -12,10 +12,10 @@ namespace game_graphics.graphics.ui.panels;
 
 public class LocationPanel : Panel
 {
-    private static readonly float _panelWidthRatio = 0.74f;
+    private static readonly float _panelWidthRatio = 0.98f;
     private static readonly float _panelWidth = HEngineSettings.Instance.WindowWidth * _panelWidthRatio;
 
-    private static readonly float _panelHeightRatio = 0.96f;
+    private static readonly float _panelHeightRatio = 0.98f;
     private static readonly float _panelHeight = HEngineSettings.Instance.WindowHeight * _panelHeightRatio;
 
     private readonly ILocationManager _locationManager;
@@ -40,11 +40,12 @@ public class LocationPanel : Panel
             HEngineSettings.Instance.SmallOffsetY);
 
     internal static Vector2f GetInitialSize()
-        => new Vector2f(_panelWidth, _panelHeight);
+        => new Vector2f(
+            _panelWidth,
+            _panelHeight);
 
     public override void Draw(RenderTarget render)
     {
-        render.Draw(this);
         CurrentLocation.Draw(render);
 
         _popupService.Draw(render);

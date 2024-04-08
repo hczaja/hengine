@@ -16,33 +16,31 @@ public class CharacterInfoPanel : Panel
     private static readonly float _panelHeight = HEngineSettings.Instance.WindowHeight * _panelHeightRatio;
 
     private static readonly float _barLength = (2f / 3f) * _panelWidth;
-    private static readonly float _barHeight = (1f / 4f) * _panelHeight;
+    private static readonly float _barHeight = (1f / 8f) * _panelHeight;
 
     private readonly Vector2f _blockSize = new Vector2f(_barLength / 3f, _barHeight);
 
     private readonly ICharacter _character;
     
-    private RectangleShape Avatar { get; }
+    private CircleShape Avatar { get; }
     private BaseBar HealthBar { get; }
     private BaseBar EnergyBar { get; }
-    private ICollection<CharacteristicBlock> Characetristics { get; }
 
     public CharacterInfoPanel(ICharacter character) 
         : base(GetInitialPosition(), GetInitialSize())
     {
         _character = character;
 
-        Avatar = new RectangleShape(
-            new Vector2f(_panelWidth / 3f, _panelHeight))
+        Avatar = new CircleShape(_panelHeight / 2f)
         {
-            Position = Position + new Vector2f(_barLength, 0f),
-            Texture = new Texture("assets/textures/avatars/cat.png")
+            Position = Position,
+            Texture = new Texture("assets/textures/avatars/cat.png"),
+            OutlineThickness = 1f,
+            OutlineColor = Color.White
         };
 
-        FillColor = Palette.Instance.C07_PaleGreen;
-
         HealthBar = new Bar(
-            Position, 
+            Position + new Vector2f(_panelHeight / 3f, _panelHeight) - 2 * new Vector2f(0f, _barHeight),
             _barLength, 
             _barHeight, 
             Palette.Instance.C02_DirtyRed, 
@@ -56,75 +54,23 @@ public class CharacterInfoPanel : Panel
             Palette.Instance.C09_PaleYellow, 
             character.Statistics.GetEnergy(), 
             character.Statistics.MaxEnergy);
-
-        Characetristics = GetCharacteristics(character.Statistics);
     }
-
-    private CharacteristicBlock[] GetCharacteristics(ICharacterStatistics stats) =>
-    [
-        GetStrengthBlock(0, 0, stats.Strength),
-        GetDexterityBlock(1, 0, stats.Dexterity),
-        GetEnduranceBlock(2, 0, stats.Endurance),
-        GetCharismaBlock(0, 1, stats.Charisma),
-        GetWisdomBlock(1, 1, stats.Wisdom),
-        GetInteligenceBlock(2, 1, stats.Inteligence)
-    ];
-
-    private CharacteristicBlock GetStrengthBlock(int col, int row, int value) => new CharacteristicBlock(
-        _blockSize,
-        Position + new Vector2f(0f, 2f * _barHeight) + new Vector2f(col * _blockSize.X, row * _blockSize.Y),
-        new Texture("assets/textures/buttons/campfire.png"),
-        value
-    );
-    private CharacteristicBlock GetDexterityBlock(int col, int row, int value) => new CharacteristicBlock(
-        _blockSize,
-        Position + new Vector2f(0f, 2f * _barHeight) + new Vector2f(col * _blockSize.X, row * _blockSize.Y),
-        new Texture("assets/textures/buttons/campfire.png"),
-        value
-    );
-    private CharacteristicBlock GetEnduranceBlock(int col, int row, int value) => new CharacteristicBlock(
-        _blockSize,
-        Position + new Vector2f(0f, 2f * _barHeight) + new Vector2f(col * _blockSize.X, row * _blockSize.Y),
-        new Texture("assets/textures/buttons/campfire.png"),
-        value
-    );
-    private CharacteristicBlock GetCharismaBlock(int col, int row, int value) => new CharacteristicBlock(
-        _blockSize,
-        Position + new Vector2f(0f, 2f * _barHeight) + new Vector2f(col * _blockSize.X, row * _blockSize.Y),
-        new Texture("assets/textures/buttons/campfire.png"),
-        value
-    );
-    private CharacteristicBlock GetWisdomBlock(int col, int row, int value) => new CharacteristicBlock(
-        _blockSize,
-        Position + new Vector2f(0f, 2f * _barHeight) + new Vector2f(col * _blockSize.X, row * _blockSize.Y),
-        new Texture("assets/textures/buttons/campfire.png"),
-        value
-    );
-    private CharacteristicBlock GetInteligenceBlock(int col, int row, int value) => new CharacteristicBlock(
-        _blockSize,
-        Position + new Vector2f(0f, 2f * _barHeight) + new Vector2f(col * _blockSize.X, row * _blockSize.Y),
-        new Texture("assets/textures/buttons/campfire.png"),
-        value
-    );
 
     internal static Vector2f GetInitialPosition()
         => new Vector2f(
-            HEngineSettings.Instance.WindowWidth - HEngineSettings.Instance.SmallOffsetX - _panelWidth,
-            HEngineSettings.Instance.SmallOffsetY);
+            HEngineSettings.Instance.SmallOffsetX,
+            HEngineSettings.Instance.WindowHeight - HEngineSettings.Instance.SmallOffsetY - _panelHeight);
 
     internal static Vector2f GetInitialSize()
-        => new Vector2f(_panelWidth, _panelHeight);
+        => new Vector2f(
+            _panelWidth,
+            _panelHeight);
 
     public override void Draw(RenderTarget render)
     {
-        render.Draw(this);
         render.Draw(Avatar);
+        
         HealthBar.Draw(render);
         EnergyBar.Draw(render);
-
-        foreach (var characteristic in Characetristics)
-        {
-            characteristic.Draw(render);
-        }
     }
 }

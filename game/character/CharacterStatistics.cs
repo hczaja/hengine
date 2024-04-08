@@ -22,7 +22,7 @@ internal class CharacterStatistics : ICharacterStatistics
 
     public float GetEnergy()
     {
-        return MaxEnergy / 2f;
+        return MaxEnergy;
     }
 
     public float GetHealth()

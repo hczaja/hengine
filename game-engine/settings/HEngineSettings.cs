@@ -16,8 +16,8 @@ public class HEngineSettings
     public float WindowWidth => Mode.Width;
     public float WindowHeight => Mode.Height;
 
-    public float SmallOffsetX => WindowWidth * 0.02f;
-    public float SmallOffsetY => WindowHeight * 0.02f;
+    public float SmallOffsetX => WindowWidth * 0.01f;
+    public float SmallOffsetY => WindowHeight * 0.01f;
 
     public Styles Styles => Styles.None;
 

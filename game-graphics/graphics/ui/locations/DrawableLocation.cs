@@ -2,7 +2,6 @@
 using game_engine.events;
 using game_engine.events.input;
 using game_engine.graphics;
-using game_engine.system;
 using game_graphics.graphics.ui.panels;
 using SFML.Graphics;
 using SFML.System;
@@ -18,7 +17,7 @@ class DrawableLocation : IDrawable, IEventHandler<MouseEvent>
 
     public DrawableLocation(IPopupService popupService, INotificationService notificationService, ILocation location)
     {
-        _background = new RectangleShape(new Vector2f(1421, 1152));
+        _background = new RectangleShape(LocationPanel.GetInitialSize());
         _background.Position = LocationPanel.GetInitialPosition();
         _background.Texture = new Texture($"assets/locations/{location.Name}.png");
 

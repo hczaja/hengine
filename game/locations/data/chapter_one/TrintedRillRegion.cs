@@ -15,7 +15,7 @@ class TrintedRillRegion : ILocation
     {
         Nodes = new List<LocationNode>()
         {
-            new LocationNode("Lumberjack House", 204, 672),
+            new LocationNode("Lumberjack House", 285, 714),
         };
     }
 }
