@@ -18,13 +18,12 @@ public class CharacterInfoPanel : Panel
     private static readonly float _barLength = (2f / 3f) * _panelWidth;
     private static readonly float _barHeight = (1f / 8f) * _panelHeight;
 
-    private readonly Vector2f _blockSize = new Vector2f(_barLength / 3f, _barHeight);
-
     private readonly ICharacter _character;
     
     private CircleShape Avatar { get; }
     private BaseBar HealthBar { get; }
     private BaseBar EnergyBar { get; }
+    private CircleShape ConsoleTrigger { get; }
 
     public CharacterInfoPanel(ICharacter character) 
         : base(GetInitialPosition(), GetInitialSize())
@@ -54,6 +53,14 @@ public class CharacterInfoPanel : Panel
             Palette.Instance.C09_PaleYellow, 
             character.Statistics.GetEnergy(), 
             character.Statistics.MaxEnergy);
+
+        ConsoleTrigger = new CircleShape(_panelHeight / 8)
+        {
+            Position = Position + new Vector2f(4f / 3f * Avatar.Radius, 0f),
+            Texture = new Texture("assets/textures/avatars/cat.png"),
+            OutlineThickness = 1f,
+            OutlineColor = Color.White
+        };
     }
 
     internal static Vector2f GetInitialPosition()
@@ -69,6 +76,7 @@ public class CharacterInfoPanel : Panel
     public override void DrawBy(RenderTarget render)
     {
         render.Draw(Avatar);
+        render.Draw(ConsoleTrigger);
 
         HealthBar.DrawBy(render);
         EnergyBar.DrawBy(render);
