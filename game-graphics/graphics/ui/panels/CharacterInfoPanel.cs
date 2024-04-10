@@ -56,7 +56,7 @@ public class CharacterInfoPanel : Panel
 
         ConsoleTrigger = new CircleShape(_panelHeight / 8)
         {
-            Position = Position + new Vector2f(4f / 3f * Avatar.Radius, 0f),
+            Position = Position + new Vector2f(2 * Avatar.Radius, Avatar.Radius),
             Texture = new Texture("assets/textures/avatars/cat.png"),
             OutlineThickness = 1f,
             OutlineColor = Color.White
