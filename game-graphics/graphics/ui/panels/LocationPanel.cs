@@ -22,6 +22,7 @@ public class LocationPanel : Panel
     private readonly IPopupService _popupService;
     private readonly INotificationService _notificationService;
     private DrawableLocation CurrentLocation { get; set; }
+    private RectangleShape Frame { get; }
 
     public LocationPanel(ILogger logger, ILocationManager locationManager)
         : base(GetInitialPosition(), GetInitialSize())
@@ -32,6 +33,13 @@ public class LocationPanel : Panel
         _notificationService = new NotificationService();
 
         CurrentLocation = new DrawableLocation(_popupService, _notificationService, locationManager.GetStartingLocation());
+
+        Frame = new RectangleShape(
+            new Vector2f(
+                HEngineSettings.Instance.WindowWidth,
+                HEngineSettings.Instance.WindowHeight));
+        Frame.Texture = new Texture("assets/locations/ui.png");
+
     }
 
     internal static Vector2f GetInitialPosition()
@@ -50,6 +58,8 @@ public class LocationPanel : Panel
 
         _popupService.DrawBy(render);
         _notificationService.DrawBy(render);
+
+        render.Draw(Frame);
     }
 
     public override void Handle(MouseEvent @event)

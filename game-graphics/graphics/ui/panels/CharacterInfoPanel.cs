@@ -30,12 +30,10 @@ public class CharacterInfoPanel : Panel
     {
         _character = character;
 
-        Avatar = new CircleShape(_panelHeight / 2f)
+        Avatar = new CircleShape(50f)
         {
-            Position = Position,
+            Position = new Vector2f(22f, 1026f),
             Texture = new Texture("assets/textures/avatars/cat.png"),
-            OutlineThickness = 1f,
-            OutlineColor = Color.White
         };
 
         HealthBar = new Bar(
@@ -58,8 +56,6 @@ public class CharacterInfoPanel : Panel
         {
             Position = Position + new Vector2f(2 * Avatar.Radius, Avatar.Radius),
             Texture = new Texture("assets/textures/avatars/cat.png"),
-            OutlineThickness = 1f,
-            OutlineColor = Color.White
         };
     }
 

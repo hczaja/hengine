@@ -12,19 +12,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="assets\fonts\Retro Gaming.ttf">
+    <None Update="assets\fonts\*.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="assets\locations\TrintedRillRegion.png">
+    <None Update="assets\locations\*.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="assets\textures\avatars\cat.png">
+    <None Update="assets\textures\avatars\*.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="assets\textures\buttons\campfire.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="assets\textures\buttons\noitem.png">
+    <None Update="assets\textures\buttons\*.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
