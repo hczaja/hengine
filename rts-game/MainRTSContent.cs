@@ -50,6 +50,7 @@ namespace rts_game
                         break;
                     case MouseEventType.Released:
                         _drawSelectionRectangle = false;
+                        _checkSelectionRectangle = true;
                         break;
                 }
             }
@@ -71,6 +72,12 @@ namespace rts_game
                 float height = shape.Position.Y - MousePosition.Y;
 
                 shape.Size = new Vector2f(-width, -height);
+            }
+
+            if (_checkSelectionRectangle)
+            {
+
+                _checkSelectionRectangle = false;
             }
         }
     }
