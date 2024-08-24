@@ -3,7 +3,7 @@ using game_engine.window;
 
 namespace game_engine.core;
 
-public sealed class HEngine
+public class HEngine
 {
     private readonly IClock _clock;
     private readonly IWindow _window;

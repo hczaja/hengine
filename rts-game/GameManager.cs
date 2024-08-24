@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net.Sockets;
 
-namespace rts_game
+namespace rts_game;
+
+public class GameManager
 {
-    internal class GameManager
+    private readonly SocketWrapper _client;
+
+    public GameManager(Socket socket)
     {
+        _client = new SocketWrapper(socket);
     }
 }

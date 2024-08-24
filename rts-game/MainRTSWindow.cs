@@ -4,7 +4,7 @@ using SFML.Graphics;
 
 namespace rts_game;
 
-internal class MainRTSWindow : IWindow
+public class MainRTSWindow : IWindow
 {
     private readonly RenderWindow _window;
     private readonly IHEngineCore _core;
