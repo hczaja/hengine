@@ -10,6 +10,7 @@ public interface IHEngineCore
     void _window_KeyReleased(object? sender, KeyEventArgs e);
     void _window_MouseButtonReleased(object? sender, MouseButtonEventArgs e);
     void _window_MouseButtonPressed(object? sender, MouseButtonEventArgs e);
+    void _window_MouseMoved(object? sender, MouseMoveEventArgs e);
 
     void Update();
     void Render(RenderTarget target);

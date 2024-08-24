@@ -8,6 +8,6 @@ namespace rts_game
         internal static readonly string Title = "RTS";
         internal static readonly Styles Styles = Styles.None;
         internal static readonly bool MouseCursorVisible = true;
-        internal static readonly bool EnableKeyRepeat = false;
+        internal static readonly bool EnableKeyRepeat = true;
     }
 }

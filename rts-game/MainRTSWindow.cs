@@ -25,6 +25,8 @@ internal class MainRTSWindow : IWindow
         _window.KeyPressed += _core._window_KeyPressed;
         _window.KeyReleased += _core._window_KeyReleased;
 
+        _window.MouseMoved += _core._window_MouseMoved;
+
         //_window.MouseButtonPressed += _window_MouseButtonPressed;
         _window.MouseButtonPressed += _core._window_MouseButtonPressed;
 
