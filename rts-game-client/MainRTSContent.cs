@@ -11,26 +11,31 @@ namespace rts_game;
 
 public class MainRTSContent : IContent, ISelectionHandler
 {
-    private readonly GameManager _gameManager;
+    private readonly GameStorage _storage;
+    private readonly GameInterface _interface;
     private readonly Selector _selector;
 
     private Vector2f MousePosition = new Vector2f(0, 0);
 
-    public MainRTSContent(GameManager gameManager)
-    {
-        _gameManager = gameManager;
+    private IEnumerable<IGameObject> selection = Enumerable.Empty<IGameObject>();
 
-        _selector = new Selector(this, _gameManager);
+    public MainRTSContent(GameStorage gameStorage)
+    {
+        _storage = gameStorage;
+
+        _interface = new GameInterface(_storage);
+        _selector = new Selector(this, _storage);
     }
 
     public void DrawBy(RenderTarget render)
     {
-        foreach (var gameObject in _gameManager.GetGameObjects())
+        foreach (var gameObject in _storage.GetGameObjects())
         {
             gameObject.DrawBy(render);
         }
 
         _selector.DrawBy(render);
+        _interface.DrawBy(render);
     }
 
     public void Handle(MouseEvent @event)
@@ -42,24 +47,38 @@ public class MainRTSContent : IContent, ISelectionHandler
         {
             _selector.Handle(@event);
         }
+
+        _interface.Handle(@event);
     }
 
     public void Handle(KeyboardEvent @event)
     {
+        _interface.Handle(@event);
     }
 
     public void Handle(ChangeContextEvent @event)
     {
     }
 
-    public void Handle(SelectedUnits @event)
+    public void Handle(SelectedUnitsEvent @event)
     {
-        
+        //foreach (var obj in selection)
+        //{
+        //    obj.Unselect();
+        //}
+
+        selection = @event.Objects;
+        //foreach (var obj in selection)
+        //{
+        //    obj.Select();
+        //}
+
+        _interface.Handle(@event);
     }
 
     public void Update()
     {
-        foreach (var gameObject in _gameManager.GetGameObjects())
+        foreach (var gameObject in _storage.GetGameObjects())
         {
             gameObject.Update();
         }

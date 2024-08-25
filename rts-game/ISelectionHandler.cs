@@ -3,5 +3,5 @@ using rts_game.events;
 
 namespace rts_game;
 
-public interface ISelectionHandler : IEventHandler<SelectedUnits>
+public interface ISelectionHandler : IEventHandler<SelectedUnitsEvent>
 { }

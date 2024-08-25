@@ -10,14 +10,14 @@ namespace rts_game;
 public class Selector : IDrawable, IEventHandler<MouseEvent>
 {
     private readonly RectangleShape _rect;
-    private readonly GameManager _manager;
+    private readonly GameStorage _manager;
 
     private readonly ISelectionHandler _selectionHandler;
 
     private bool _drawSelectionRectangle;
     private bool _checkSelectionRectangle;
 
-    public Selector(ISelectionHandler selectionHandler, GameManager manager)
+    public Selector(ISelectionHandler selectionHandler, GameStorage manager)
     {
         _selectionHandler = selectionHandler;
         _manager = manager; 
@@ -80,11 +80,8 @@ public class Selector : IDrawable, IEventHandler<MouseEvent>
                             e.GetPositionRect()
                              .Intersects(_rect.GetGlobalBounds()));
 
-            if (selectedObjects.Any())
-            {
-                _selectionHandler.Handle(
-                    new SelectedUnits(selectedObjects));
-            }
+            _selectionHandler.Handle(
+                new SelectedUnitsEvent(selectedObjects));            
 
             _checkSelectionRectangle = false;
         }

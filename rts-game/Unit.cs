@@ -4,7 +4,7 @@ using SFML.System;
 
 namespace rts_game;
 
-public class Unit : IDrawable
+public class Unit : IGameObject, IDrawable
 {
     public static class Type
     {
@@ -44,6 +44,16 @@ public class Unit : IDrawable
     public void Update()
     {
         _shape.Position = _collisionBox.Position - new Vector2f(0, 32);
+    }
+
+    public void Select()
+    {
+        _collisionBox.OutlineColor = Color.Red;
+    }
+
+    public void Unselect()
+    {
+        _collisionBox.OutlineColor = Color.White;
     }
 }
 

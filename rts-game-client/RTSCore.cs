@@ -10,11 +10,11 @@ namespace rts_game;
 public class RTSCore : IHEngineCore
 {
     private readonly IContent _content;
-    private readonly GameManager _gameManager;
+    private readonly GameStorage _gameManager;
 
     public RTSCore(Socket socket)
     {
-        _gameManager = new GameManager(socket);
+        _gameManager = new GameStorage(socket);
         _content = new MainRTSContent(_gameManager);
     }
 
