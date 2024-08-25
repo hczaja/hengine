@@ -11,7 +11,7 @@
 *.sln.docstates
 
 # Aseprite assets
-*.aseprite
+/rts-game/assets/*.aseprite
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
