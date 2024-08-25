@@ -7,6 +7,8 @@ namespace rts_game.server;
 public class GameServer : IDisposable
 {
     private readonly Socket _listener;
+    private readonly GameState _gameState;
+
 
     public GameServer(IPEndPoint endpoint)
     {
@@ -17,6 +19,8 @@ public class GameServer : IDisposable
 
         _listener.Bind(endpoint);
         _listener.Listen(10);
+
+        _gameState = new GameState();
     }
 
     public async Task Run()

@@ -1,6 +1,7 @@
 ﻿using game_engine.events;
 using game_engine.events.input;
 using game_engine.graphics;
+using rts_game.events;
 using SFML.Graphics;
 using SFML.System;
 
@@ -9,12 +10,18 @@ namespace rts_game;
 public class Selector : IDrawable, IEventHandler<MouseEvent>
 {
     private readonly RectangleShape _rect;
+    private readonly GameManager _manager;
+
+    private readonly ISelectionHandler _selectionHandler;
 
     private bool _drawSelectionRectangle;
     private bool _checkSelectionRectangle;
 
-    public Selector()
+    public Selector(ISelectionHandler selectionHandler, GameManager manager)
     {
+        _selectionHandler = selectionHandler;
+        _manager = manager; 
+
         _rect = new RectangleShape();
 
         _rect.FillColor = Color.Transparent;
@@ -67,7 +74,17 @@ public class Selector : IDrawable, IEventHandler<MouseEvent>
 
         if (_checkSelectionRectangle)
         {
-            // ...
+            var selectedObjects = 
+                _manager.GetGameObjects()
+                        .Where(e => 
+                            e.GetPositionRect()
+                             .Intersects(_rect.GetGlobalBounds()));
+
+            if (selectedObjects.Any())
+            {
+                _selectionHandler.Handle(
+                    new SelectedUnits(selectedObjects));
+            }
 
             _checkSelectionRectangle = false;
         }

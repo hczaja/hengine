@@ -9,5 +9,6 @@ namespace rts_game
         public static readonly Styles Styles = Styles.None;
         public static readonly bool MouseCursorVisible = true;
         public static readonly bool EnableKeyRepeat = true;
+        public static readonly bool DrawCollisions = true;
     }
 }

@@ -12,4 +12,10 @@
     <ProjectReference Include="..\game-engine\game-engine.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="assets\pikeman.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
